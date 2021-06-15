@@ -11,3 +11,19 @@ for (let i = 0; i < circles.length; i++) {
       }
     });
 }
+
+function fillRed(circle) {
+  if (circle.classList.contains('bg-danger')) {
+    circle.classList.remove('bg-danger');
+  } else {
+    circle.classList.add('bg-danger');
+  }
+}
+
+function fillYellow(circle) {
+  if (circle.classList.contains('bg-warning')) {
+    circle.classList.remove('bg-warning');
+  } else {
+    circle.classList.add('bg-warning');
+  }
+}
