@@ -7,9 +7,9 @@ for (let i = 0; i < circles.length; i++) {
     const circle = circles[i];
     circle.addEventListener('click', () => {
       if (redBtn.classList.contains('disabled')) {
-        fillRed(circle);
+        fillCircle(circle, 'bg-danger');
       } else {
-        fillYellow(circle);
+        fillCircle(circle, 'bg-warning');
       }
     });
 }
@@ -22,19 +22,11 @@ yellowBtn.addEventListener('click', () => {
   selectPlayer(yellowBtn, redBtn);
 });
 
-function fillRed(circle) {
-  if (circle.classList.contains('bg-danger')) {
-    circle.classList.remove('bg-danger');
+function fillCircle(circle, color) {
+  if (circle.classList.contains(color)) {
+    circle.classList.remove(color);
   } else {
-    circle.classList.add('bg-danger');
-  }
-}
-
-function fillYellow(circle) {
-  if (circle.classList.contains('bg-warning')) {
-    circle.classList.remove('bg-warning');
-  } else {
-    circle.classList.add('bg-warning');
+    circle.classList.add(color);
   }
 }
 
