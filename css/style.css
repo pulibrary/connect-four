@@ -4,8 +4,11 @@
   margin-left: -117px;
 }
 
+.grid {
+  width: 540px;
+  height: 500px;
+}
+
 .col {
-  width: 5px;
-  height: 48px;
   margin: 5px;
 }
