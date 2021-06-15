@@ -15,6 +15,10 @@ for (let i = 0; i < circles.length; i++) {
     const disabled = 'disabled';
 
     circle.addEventListener('click', () => {
+      if (circle.classList.contains('bg-danger') ||
+          circle.classList.contains('bg-warning')) {
+        return;
+      }
       if (redBtn.classList.contains(btnDanger)) {
         fillCircle(circle, 'bg-danger');
 
