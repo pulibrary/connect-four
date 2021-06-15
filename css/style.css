@@ -3,3 +3,9 @@
 .navbar-brand {
   margin-left: -117px;
 }
+
+.col {
+  width: 5px;
+  height: 48px;
+  margin: 5px;
+}
