@@ -1,16 +1,22 @@
 /* ----------------------- Styles -----------------------*/
 
 .grid {
-  width: 540px;
-  height: 450px;
+  width: 500px;
+  height: 420px;
+  background-color: blue;
+  border-radius: 5px;
 }
 
 .circle {
-  height: 55px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
   margin: 5px;
   font-size: 0;
+  background-color: #fff;
 }
 
 .circle:hover {
   cursor: pointer;
+  border: 2px;
 }
