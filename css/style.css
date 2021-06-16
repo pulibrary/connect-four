@@ -8,6 +8,7 @@
 .circle {
   height: 55px;
   margin: 5px;
+  font-size: 0;
 }
 
 .circle:hover {
