@@ -2,6 +2,7 @@
 const circles = document.getElementsByClassName('col');
 const redBtn = document.getElementById('choose-red-player');
 const yellowBtn = document.getElementById('choose-yellow-player');
+let numClicks = 0;
 
 for (let i = 0; i < circles.length; i++) {
     const circle = circles[i];
@@ -19,6 +20,9 @@ for (let i = 0; i < circles.length; i++) {
           circle.classList.contains('bg-warning')) {
         return;
       }
+
+      numClicks++;
+
       if (redBtn.classList.contains(btnDanger)) {
         fillCircle(circle, 'bg-danger');
 
@@ -39,6 +43,12 @@ for (let i = 0; i < circles.length; i++) {
         redBtn.classList.remove(btnOutlineDanger);
         redBtn.classList.remove(disabled);
         redBtn.classList.add(btnDanger);
+      }
+
+      if (numClicks === 42) {
+        if(confirm("Game over! You are out of turns. Click 'OK' to reset the board.")){
+            window.location.reload();
+        }
       }
     });
 }
