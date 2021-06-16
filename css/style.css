@@ -16,6 +16,7 @@
   margin: 5px;
   font-size: 0;
   background-color: #fff;
+  border: 2px solid black;
 }
 
 .circle:hover {
