@@ -14,26 +14,26 @@ const btnOutlineWarning = 'btn-outline-warning';
 const bgWarning = 'bg-warning';
 
 const disabled = 'disabled';
+const numRows = 6;
 let numClicks = 0;
 
 for (let i = 0; i < circles.length; i++) {
     const circle = circles[i];
 
     circle.addEventListener('click', () => {
-      if (isFilled(circle)) {
-        return;
-      }
-
-      numClicks++;
+      const colNumber = parseInt(circle.innerHTML, 10);
 
       if (redBtn.classList.contains(btnDanger)) {
-        fillCircle(circle, 'bg-danger');
-        addRemoveClasses(redBtn, yellowBtn, btnDanger, btnOutlineDanger,
-                        btnOutlineWarning, btnWarning)
+        if (fillCircle('bg-danger', colNumber)) {
+          addRemoveClasses(redBtn, yellowBtn, btnDanger, btnOutlineDanger,
+                          btnOutlineWarning, btnWarning)
+        }
+
       } else {
-        fillCircle(circle, 'bg-warning');
-        addRemoveClasses(yellowBtn, redBtn, btnWarning, btnOutlineWarning,
-                        btnOutlineDanger, btnDanger)
+        if (fillCircle('bg-warning', colNumber)) {
+          addRemoveClasses(yellowBtn, redBtn, btnWarning, btnOutlineWarning,
+                          btnOutlineDanger, btnDanger)
+        }
       }
 
       // if board is full, add alert that can refresh the page
@@ -60,21 +60,29 @@ function isFilled(circle) {
 }
 
 /**
- * This function fills in the circle that was clicked on the board.
+ * This function finds the lowest circle in a column that has not been filled
+ * and fills it.
  *
- * @param {circle element} circle - Element corresponding to circle on the game board
- * @param {string} color - Class to add color to the element
+ * @param {color} circle - Color to fill a circle.
+ * @param {colNumber} color - Column number that was clicked
+
+ * @return {boolean} - Returns whether a circle was filled or not
  *
  * @example
  *
  *     fillCircle(circle, 'bg-warning');
 **/
-function fillCircle(circle, color) {
-  if (circle.classList.contains(color)) {
-    circle.classList.remove(color);
-  } else {
-    circle.classList.add(color);
+function fillCircle(color, colNumber) {
+  for (let i = numRows; i > 0; i--) {
+    let row = document.querySelector(`.grid .row:nth-child(${i})`);
+    let circle = row.childNodes[colNumber * 2 + 1];
+    if (!isFilled(circle)) {
+      numClicks++;
+      circle.classList.add(color);
+      return true;
+    }
   }
+  return false;
 }
 
 /**
