@@ -36,13 +36,6 @@ for (let i = 0; i < circles.length; i++) {
                           btnOutlineDanger, btnDanger)
         }
       }
-
-      // if board is full, add alert that can refresh the page
-      if (numClicks === 42) {
-        if(confirm("Game over! You are out of turns. Click 'OK' to reset the board.")){
-            window.location.reload();
-        }
-      }
     });
 }
 
