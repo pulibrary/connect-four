@@ -20,9 +20,7 @@ for (let i = 0; i < circles.length; i++) {
     const circle = circles[i];
 
     circle.addEventListener('click', () => {
-      // return if the circle is already colored in
-      if (circle.classList.contains(bgDanger) ||
-          circle.classList.contains(bgWarning)) {
+      if (isFilled(circle)) {
         return;
       }
 
@@ -47,6 +45,19 @@ for (let i = 0; i < circles.length; i++) {
     });
 }
 
+/**
+ * This function determined if selected circle is filled.
+ *
+ * @param {circle element} circle - Element corresponding to circle on the game board
+ * @return {boolean} - Boolean value
+ *
+ * @example
+ *
+ *     isFilled(circle);
+**/
+function isFilled(circle) {
+  return circle.classList.contains(bgDanger) || circle.classList.contains(bgWarning);
+}
 
 /**
  * This function fills in the circle that was clicked on the board.
@@ -56,7 +67,7 @@ for (let i = 0; i < circles.length; i++) {
  *
  * @example
  *
- *     fillCircle(circle, 'bg-warning')
+ *     fillCircle(circle, 'bg-warning');
 **/
 function fillCircle(circle, color) {
   if (circle.classList.contains(color)) {
@@ -80,7 +91,7 @@ function fillCircle(circle, color) {
  * @example
  *
  *     addRemoveClasses(redBtn, yellowBtn, 'btn-danger', 'btn-outline-danger',
- *               'btn-outline-warning', 'btn-warning')
+ *               'btn-outline-warning', 'btn-warning');
 **/
 function addRemoveClasses(currentBtn, nextBtn, currentRemove, currentAdd,
                           nextRemove, nextAdd) {
