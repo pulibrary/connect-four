@@ -1,5 +1,5 @@
 // elements
-const circles = document.getElementsByClassName('col');
+const circles = document.getElementsByClassName('circle');
 const redBtn = document.getElementById('choose-red-player');
 const yellowBtn = document.getElementById('choose-yellow-player');
 
@@ -20,6 +20,7 @@ for (let i = 0; i < circles.length; i++) {
     const circle = circles[i];
 
     circle.addEventListener('click', () => {
+      // return if the circle is already colored in
       if (circle.classList.contains(bgDanger) ||
           circle.classList.contains(bgWarning)) {
         return;
@@ -37,6 +38,7 @@ for (let i = 0; i < circles.length; i++) {
                         btnOutlineDanger, btnDanger)
       }
 
+      // if board is full, add alert that can refresh the page
       if (numClicks === 42) {
         if(confirm("Game over! You are out of turns. Click 'OK' to reset the board.")){
             window.location.reload();
@@ -45,6 +47,17 @@ for (let i = 0; i < circles.length; i++) {
     });
 }
 
+
+/**
+ * This function fills in the circle that was clicked on the board.
+ *
+ * @param {circle element} circle - Element corresponding to circle on the game board
+ * @param {string} color - Class to add color to the element
+ *
+ * @example
+ *
+ *     fillCircle(circle, 'bg-warning')
+**/
 function fillCircle(circle, color) {
   if (circle.classList.contains(color)) {
     circle.classList.remove(color);
@@ -53,13 +66,29 @@ function fillCircle(circle, color) {
   }
 }
 
-function addRemoveClasses(currentBtn, nextBtn, currentRemoveClass,
-                          currentAddClass, nextRemoveClass, nextAddClass) {
-  currentBtn.classList.remove(currentRemoveClass);
-  currentBtn.classList.add(currentAddClass);
+/**
+ * This function updates which player button is highlighted to indicate whose
+ * turn it is.
+ *
+ * @param {button element} currentBtn - Button corresponding to current player color
+ * @param {button element} nextBtn - Button corresponding to next player color
+ * @param {string} currentRemove - Class to remove from current button
+ * @param {string} currentAdd - Class to add to current button
+ * @param {string} nextRemove - Class to remove from next button
+ * @param {string} nextAdd - Class to add to next button
+ *
+ * @example
+ *
+ *     addRemoveClasses(redBtn, yellowBtn, 'btn-danger', 'btn-outline-danger',
+ *               'btn-outline-warning', 'btn-warning')
+**/
+function addRemoveClasses(currentBtn, nextBtn, currentRemove, currentAdd,
+                          nextRemove, nextAdd) {
+  currentBtn.classList.remove(currentRemove);
+  currentBtn.classList.add(currentAdd);
   currentBtn.classList.add(disabled);
 
-  nextBtn.classList.remove(nextRemoveClass);
+  nextBtn.classList.remove(nextRemove);
   nextBtn.classList.remove(disabled);
-  nextBtn.classList.add(nextAddClass);
+  nextBtn.classList.add(nextAdd);
 }
