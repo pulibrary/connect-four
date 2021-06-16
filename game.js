@@ -2,6 +2,7 @@
 const circles = document.getElementsByClassName('circle');
 const redBtn = document.getElementById('choose-red-player');
 const yellowBtn = document.getElementById('choose-yellow-player');
+const resetBtn = document.getElementById('reset');
 
 // red classes
 const btnDanger= 'btn-danger';
@@ -45,6 +46,8 @@ for (let i = 0; i < circles.length; i++) {
     });
 }
 
+resetBtn.addEventListener('click', () => resetBoard());
+
 /**
  * This function determined if selected circle is filled.
  *
@@ -57,6 +60,24 @@ for (let i = 0; i < circles.length; i++) {
 **/
 function isFilled(circle) {
   return circle.classList.contains(bgDanger) || circle.classList.contains(bgWarning);
+}
+
+/**
+ * This function clears all filled circles.
+ *
+ * @example
+ *
+ *     resetBoard();
+**/
+function resetBoard() {
+  for (let i = 0; i < circles.length; i++) {
+      const circle = circles[i];
+      if (circle.classList.contains(bgDanger)) {
+        circle.classList.remove(bgDanger);
+      } else if (circle.classList.contains(bgWarning)) {
+        circle.classList.remove(bgWarning);
+      }
+  }
 }
 
 /**
