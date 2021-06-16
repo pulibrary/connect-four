@@ -21,6 +21,26 @@ let numClicks = 0;
 for (let i = 0; i < circles.length; i++) {
     const circle = circles[i];
 
+    circle.addEventListener('mouseover', () => {
+      const colNumber = parseInt(circle.innerHTML, 10);
+
+      for (let i = numRows; i > 0; i--) {
+        let row = document.querySelector(`.grid .row:nth-child(${i})`);
+        let circle = row.childNodes[colNumber * 2 + 1];
+        circle.style.border = '4px solid black';
+      }
+    });
+
+    circle.addEventListener('mouseout', () => {
+      const colNumber = parseInt(circle.innerHTML, 10);
+
+      for (let i = numRows; i > 0; i--) {
+        let row = document.querySelector(`.grid .row:nth-child(${i})`);
+        let circle = row.childNodes[colNumber * 2 + 1];
+        circle.style.border = '2px solid black';
+      }
+    });
+
     circle.addEventListener('click', () => {
       const colNumber = parseInt(circle.innerHTML, 10);
 
