@@ -5,11 +5,11 @@
   height: 450px;
 }
 
-.col {
+.circle {
   height: 55px;
   margin: 5px;
 }
 
-.col:hover {
+.circle:hover {
   cursor: pointer;
 }
