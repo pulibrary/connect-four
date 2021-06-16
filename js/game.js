@@ -1,23 +1,27 @@
-// click div and change color
+// elements
 const circles = document.getElementsByClassName('col');
 const redBtn = document.getElementById('choose-red-player');
 const yellowBtn = document.getElementById('choose-yellow-player');
+
+// red classes
+const btnDanger= 'btn-danger';
+const btnOutlineDanger = 'btn-outline-danger';
+const bgDanger = 'bg-danger';
+
+// yellow classes
+const btnWarning = 'btn-warning';
+const btnOutlineWarning = 'btn-outline-warning';
+const bgWarning = 'bg-warning';
+
+const disabled = 'disabled';
 let numClicks = 0;
 
 for (let i = 0; i < circles.length; i++) {
     const circle = circles[i];
 
-    const btnDanger= 'btn-danger';
-    const btnOutlineDanger = 'btn-outline-danger';
-
-    const btnWarning = 'btn-warning';
-    const btnOutlineWarning = 'btn-outline-warning';
-
-    const disabled = 'disabled';
-
     circle.addEventListener('click', () => {
-      if (circle.classList.contains('bg-danger') ||
-          circle.classList.contains('bg-warning')) {
+      if (circle.classList.contains(bgDanger) ||
+          circle.classList.contains(bgWarning)) {
         return;
       }
 
@@ -25,24 +29,12 @@ for (let i = 0; i < circles.length; i++) {
 
       if (redBtn.classList.contains(btnDanger)) {
         fillCircle(circle, 'bg-danger');
-
-        redBtn.classList.remove(btnDanger);
-        redBtn.classList.add(btnOutlineDanger);
-        redBtn.classList.add(disabled);
-
-        yellowBtn.classList.remove(btnOutlineWarning);
-        yellowBtn.classList.remove(disabled);
-        yellowBtn.classList.add(btnWarning);
+        addRemoveClasses(redBtn, yellowBtn, btnDanger, btnOutlineDanger,
+                        btnOutlineWarning, btnWarning)
       } else {
         fillCircle(circle, 'bg-warning');
-
-        yellowBtn.classList.remove(btnWarning);
-        yellowBtn.classList.add(btnOutlineWarning);
-        yellowBtn.classList.add(disabled);
-
-        redBtn.classList.remove(btnOutlineDanger);
-        redBtn.classList.remove(disabled);
-        redBtn.classList.add(btnDanger);
+        addRemoveClasses(yellowBtn, redBtn, btnWarning, btnOutlineWarning,
+                        btnOutlineDanger, btnDanger)
       }
 
       if (numClicks === 42) {
@@ -59,4 +51,15 @@ function fillCircle(circle, color) {
   } else {
     circle.classList.add(color);
   }
+}
+
+function addRemoveClasses(currentBtn, nextBtn, currentRemoveClass,
+                          currentAddClass, nextRemoveClass, nextAddClass) {
+  currentBtn.classList.remove(currentRemoveClass);
+  currentBtn.classList.add(currentAddClass);
+  currentBtn.classList.add(disabled);
+
+  nextBtn.classList.remove(nextRemoveClass);
+  nextBtn.classList.remove(disabled);
+  nextBtn.classList.add(nextAddClass);
 }
