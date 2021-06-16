@@ -5,6 +5,8 @@
   height: 405px;
   background-color: blue;
   border-radius: 5px 5px 0 0;
+  border: 2px solid black;
+  border-bottom: none;
 }
 
 .circle {
@@ -20,11 +22,10 @@
   cursor: pointer;
 }
 
-.base {
-  cursor: pointer;
-  width: 600px;
-  height: 25px;
+#base {
+  width: 560px;
+  height: 30px;
   background-color: blue;
-  border-radius: 5px;
-  border-color: blue;
+  border: 2px solid black;
+  border-radius: 5px 5px 0 0;
 }
