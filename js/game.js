@@ -1,49 +1,26 @@
 // elements
+/* ----------------------- Element Variables -----------------------*/
 const slots = document.getElementsByClassName('circle');
 const resetBtn = document.getElementById('reset');
 const playerBtns = document.getElementsByClassName('player-btn');
 
-/* Objects -------------------------------------------------------- */
-
-class Board {
-  constructor() {
-  }
-}
-
-class Player {
-  constructor(color) {
-    this.color = color;
-    this.wins = 0;
-  }
-
-  set turn(bool) {
-    this._turn = bool;
-  }
-
-  get turn() {
-    return this._turn;
-  }
-
-  updateWins() {
-    this.wins++;
-  }
-
-  getWins() {
-    return this.wins;
-  }
-}
+/* ----------------------- Other Variables -----------------------*/
 
 let player1 = new Player('bg-danger');
 player1.turn = 'true';
 let player2 = new Player('bg-warning');
 player2.turn = 'false';
 
-/* /Objects -------------------------------------------------------- */
+const numColumns = 7;
+const numSlots = 42;
+let lastSlots = [];
+
+/* ----------------------- Event Handling -----------------------*/
 
 for (let i = 0; i < slots.length; i++) {
     const slot = slots[i];
 
-    // find last slot in current column
+    // find index for last slot in current column
     let lastSlotNum = i;
     while ((lastSlotNum + 7) < 42) {
       lastSlotNum += 7;
@@ -75,24 +52,14 @@ for (let i = 0; i < slots.length; i++) {
          player2.turn = !player2.turn;
        }
 
-       checkBoard();
     });
 }
 
 resetBtn.addEventListener('click', () => resetBoard());
 
+/* ----------------------- Functions -----------------------*/
 /**
- * This function determined if selected slot is filled.
- *
- * @param {slot element} slot - Element corresponding to slot on the game board
- * @return {boolean} - Boolean value
-**/
-function checkBoard() {
-  return slot.classList.contains(player1.color) || slot.classList.contains(player2.color);
-}
-
-/**
- * This function determined if selected slot is filled.
+ * Determines if selected slot is filled.
  *
  * @param {slot element} slot - Element corresponding to slot on the game board
  * @return {boolean} - Boolean value
@@ -102,7 +69,7 @@ function isFilled(slot) {
 }
 
 /**
- * This function clears all filled slots.
+ * Clears all filled slots.
 **/
 function resetBoard() {
   for (let i = 0; i < slots.length; i++) {
@@ -116,8 +83,7 @@ function resetBoard() {
 }
 
 /**
- * This function finds the lowest slot in a column that has not been filled
- * and fills it.
+ * Finds the lowest slot in a column that has not been filled and fills it.
  *
  * @param {color} number - Index for last slot in clicked column.
  * @param {colNumber} color - Color to fill slot
@@ -136,7 +102,7 @@ function fillSlot(lastSlotNum, color) {
 }
 
 /**
- * This function updates which btn is highlighted to indicate whose turn it is.
+ * Updates which btn is highlighted to indicate whose turn it is.
 **/
 function switchBtns() {
   for (let i = 0; i < playerBtns.length; i++) {
