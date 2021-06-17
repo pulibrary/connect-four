@@ -1,11 +1,10 @@
 // elements
 const slots = document.getElementsByClassName('circle');
-const redBtn = document.getElementById('choose-red-player');
-const yellowBtn = document.getElementById('choose-yellow-player');
 const resetBtn = document.getElementById('reset');
+const playerBtns = document.getElementsByClassName('player-btn');
 
 // red classes
-const btnDanger= 'btn-danger';
+const btnDanger = 'btn-danger';
 const btnOutlineDanger = 'btn-outline-danger';
 const red = 'bg-danger';
 
@@ -83,18 +82,16 @@ for (let i = 0; i < slots.length; i++) {
 
       if (player1.turn) {
         if (fillslot(red, colNumber)) {
-          addRemoveClasses(redBtn, yellowBtn, btnDanger, btnOutlineDanger,
-                          btnOutlineWarning, btnWarning)
+          switchBtns();
+          player1.turn = false;
+          player2.turn = true;
         }
-        player1.turn = false;
-        player2.turn = true;
       } else {
         if (fillslot(yellow, colNumber)) {
-          addRemoveClasses(yellowBtn, redBtn, btnWarning, btnOutlineWarning,
-                          btnOutlineDanger, btnDanger)
+          switchBtns();
+          player2.turn = false;
+          player1.turn = true;
         }
-        player2.turn = false;
-        player1.turn = true;
       }
     });
 }
@@ -160,28 +157,19 @@ function fillslot(color, colNumber) {
 }
 
 /**
- * This function updates which player button is highlighted to indicate whose
- * turn it is.
- *
- * @param {button element} currentBtn - Button corresponding to current player color
- * @param {button element} nextBtn - Button corresponding to next player color
- * @param {string} currentRemove - Class to remove from current button
- * @param {string} currentAdd - Class to add to current button
- * @param {string} nextRemove - Class to remove from next button
- * @param {string} nextAdd - Class to add to next button
+ * This function updates which btn is highlighted to indicate whose turn it is.
  *
  * @example
  *
- *     addRemoveClasses(redBtn, yellowBtn, 'btn-danger', 'btn-outline-danger',
- *               'btn-outline-warning', 'btn-warning');
+ *     switchBtns();
 **/
-function addRemoveClasses(currentBtn, nextBtn, currentRemove, currentAdd,
-                          nextRemove, nextAdd) {
-  currentBtn.classList.remove(currentRemove);
-  currentBtn.classList.add(currentAdd);
-  currentBtn.classList.add(disabled);
-
-  nextBtn.classList.remove(nextRemove);
-  nextBtn.classList.remove(disabled);
-  nextBtn.classList.add(nextAdd);
+function switchBtns() {
+  for (let i = 0; i < playerBtns.length; i++) {
+    playerBtn = playerBtns[i];
+    if (playerBtn.classList.contains('d-none')) {
+      playerBtn.classList.remove('d-none');
+    } else {
+      playerBtn.classList.add('d-none')
+    }
+  }
 }
