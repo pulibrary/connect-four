@@ -45,13 +45,13 @@ for (let i = 0; i < circles.length; i++) {
       const colNumber = parseInt(circle.innerHTML, 10);
 
       if (redBtn.classList.contains(btnDanger)) {
-        if (fillCircle('bg-danger', colNumber)) {
+        if (fillCircle(bgDanger, colNumber)) {
           addRemoveClasses(redBtn, yellowBtn, btnDanger, btnOutlineDanger,
                           btnOutlineWarning, btnWarning)
         }
 
       } else {
-        if (fillCircle('bg-warning', colNumber)) {
+        if (fillCircle(bgWarning, colNumber)) {
           addRemoveClasses(yellowBtn, redBtn, btnWarning, btnOutlineWarning,
                           btnOutlineDanger, btnDanger)
         }
