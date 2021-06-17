@@ -20,11 +20,15 @@ let numClicks = 0;
 
 /* Objects -------------------------------------------------------- */
 
+class Board {
+  constructor() {
+  }
+}
+
 class Player {
   constructor(color) {
     this.color = color;
     this.wins = 0;
-    this.board = new Board(circles);
   }
 
   set turn(bool) {
