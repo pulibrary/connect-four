@@ -10,6 +10,7 @@ let player1 = new Player('bg-danger');
 player1.turn = true;
 let player2 = new Player('bg-warning');
 player2.turn = false;
+let board = new Board(slots);
 
 const numColumns = 7;
 const numSlots = 42;
@@ -17,8 +18,8 @@ let lastSlots = [];
 
 /* ----------------------- Event Handling -----------------------*/
 
-for (let i = 0; i < slots.length; i++) {
-    const slot = slots[i];
+for (let i = 0; i < board.length(); i++) {
+    const slot = board.getSlot(i);
 
     // find index for last slot in current column
     let lastSlotNum = i;
@@ -34,14 +35,14 @@ for (let i = 0; i < slots.length; i++) {
     // bold border of current line on mouseover
     slot.addEventListener('mouseover', () => {
       for (let i = lastSlotNum; i >= 0; i -= 7) {
-        slots[i].style.border = '4px solid black';
+        slot.style.border = '4px solid black';
       }
     });
 
     // un-bold border of current line on mouseout
     slot.addEventListener('mouseout', () => {
       for (let i = lastSlotNum; i >= 0; i -= 7) {
-        slots[i].style.border = '2px solid black';
+        slot.style.border = '2px solid black';
       }
     });
 
@@ -60,7 +61,7 @@ for (let i = 0; i < slots.length; i++) {
     });
 }
 
-resetBtn.addEventListener('click', () => resetBoard());
+resetBtn.addEventListener('click', () => board.reset());
 
 /* ----------------------- Functions -----------------------*/
 /**
@@ -76,16 +77,16 @@ function isFilled(slot) {
 /**
  * Clears all filled slots.
 **/
-function resetBoard() {
-  for (let i = 0; i < slots.length; i++) {
-      let slot = slots[i];
-      if (slot.classList.contains(player1.color)) {
-        slot.classList.remove(player1.color);
-      } else if (slot.classList.contains(player2.color)) {
-        slot.classList.remove(player2.color);
-      }
-  }
-}
+// function resetBoard() {
+//   for (let i = 0; i < slots.length; i++) {
+//       let slot = slots[i];
+//       if (slot.classList.contains(player1.color)) {
+//         slot.classList.remove(player1.color);
+//       } else if (slot.classList.contains(player2.color)) {
+//         slot.classList.remove(player2.color);
+//       }
+//   }
+// }
 
 /**
  * Finds the lowest slot in a column that has not been filled and fills it.
