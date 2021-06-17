@@ -3,20 +3,6 @@ const slots = document.getElementsByClassName('circle');
 const resetBtn = document.getElementById('reset');
 const playerBtns = document.getElementsByClassName('player-btn');
 
-// red classes
-const btnDanger = 'btn-danger';
-const btnOutlineDanger = 'btn-outline-danger';
-const red = 'bg-danger';
-
-// yellow classes
-const btnWarning = 'btn-warning';
-const btnOutlineWarning = 'btn-outline-warning';
-const yellow = 'bg-warning';
-
-const disabled = 'disabled';
-const numRows = 6;
-let numClicks = 0;
-
 /* Objects -------------------------------------------------------- */
 
 class Board {
@@ -47,9 +33,9 @@ class Player {
   }
 }
 
-let player1 = new Player(red);
+let player1 = new Player('bg-danger');
 player1.turn = 'true';
-let player2 = new Player(yellow);
+let player2 = new Player('bg-warning');
 player2.turn = 'false';
 
 /* /Objects -------------------------------------------------------- */
@@ -80,13 +66,13 @@ for (let i = 0; i < slots.length; i++) {
     // add token to lowest slot when a slot in the column is clicked
     slot.addEventListener('click', () => {
       if (player1.turn) {
-        if (fillSlot(lastSlotNum, red)) {
+        if (fillSlot(lastSlotNum, player1.color)) {
           switchBtns();
           player1.turn = false;
           player2.turn = true;
         }
       } else {
-        if (fillSlot(lastSlotNum, yellow)) {
+        if (fillSlot(lastSlotNum, player2.color)) {
           switchBtns();
           player2.turn = false;
           player1.turn = true;
@@ -108,7 +94,7 @@ resetBtn.addEventListener('click', () => resetBoard());
  *     isFilled(slot);
 **/
 function isFilled(slot) {
-  return slot.classList.contains(red) || slot.classList.contains(yellow);
+  return slot.classList.contains(player1.color) || slot.classList.contains(player2.color);
 }
 
 /**
@@ -121,10 +107,10 @@ function isFilled(slot) {
 function resetBoard() {
   for (let i = 0; i < slots.length; i++) {
       let slot = slots[i];
-      if (slot.classList.contains(red)) {
-        slot.classList.remove(red);
-      } else if (slot.classList.contains(yellow)) {
-        slot.classList.remove(yellow);
+      if (slot.classList.contains(player1.color)) {
+        slot.classList.remove(player1.color);
+      } else if (slot.classList.contains(player2.color)) {
+        slot.classList.remove(player2.color);
       }
   }
 }
@@ -146,7 +132,6 @@ function fillSlot(lastSlotNum, color) {
   for (let i = lastSlotNum; i >= 0; i -= 7) {
     let slot = slots[i];
     if (!isFilled(slot)) {
-      numClicks++;
       slot.classList.add(color);
       return true;
     }
