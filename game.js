@@ -56,9 +56,10 @@ player2.turn = 'false';
 
 for (let i = 0; i < slots.length; i++) {
     const slot = slots[i];
+    const colNumber = parseInt(slot.innerHTML, 10);
 
     slot.addEventListener('mouseover', () => {
-      const colNumber = parseInt(slot.innerHTML, 10);
+
 
       for (let i = numRows; i > 0; i--) {
         let row = document.querySelector(`.grid .row:nth-child(${i})`);
@@ -68,7 +69,6 @@ for (let i = 0; i < slots.length; i++) {
     });
 
     slot.addEventListener('mouseout', () => {
-      const colNumber = parseInt(slot.innerHTML, 10);
 
       for (let i = numRows; i > 0; i--) {
         let row = document.querySelector(`.grid .row:nth-child(${i})`);
@@ -78,16 +78,14 @@ for (let i = 0; i < slots.length; i++) {
     });
 
     slot.addEventListener('click', () => {
-      const colNumber = parseInt(slot.innerHTML, 10);
-
       if (player1.turn) {
-        if (fillslot(red, colNumber)) {
+        if (findSlot(red, i)) {
           switchBtns();
           player1.turn = false;
           player2.turn = true;
         }
       } else {
-        if (fillslot(yellow, colNumber)) {
+        if (findSlot(yellow, i)) {
           switchBtns();
           player2.turn = false;
           player1.turn = true;
@@ -141,19 +139,30 @@ function resetBoard() {
  *
  * @example
  *
- *     fillslot(slot, 'bg-warning');
+ *     findSlot(slot, 'bg-warning');
 **/
-function fillslot(color, colNumber) {
-  for (let i = numRows; i > 0; i--) {
-    let row = document.querySelector(`.grid .row:nth-child(${i})`);
-    let slot = row.childNodes[colNumber * 2 + 1];
+function findSlot(color, i) {
+  console.log(i);
+  for (let j = i; j < 42; j += 7) {
+    let slot = slots[j];
     if (!isFilled(slot)) {
-      numClicks++;
-      slot.classList.add(color);
-      return true;
+      if (j + 7 >= 42) {
+        return fillSlot(slot, color);
+      }
+    } else {
+      slot = slots[j - 7];
+      if (!isFilled(slot)) {
+        return fillSlot(slot, color);
+      }
+      return false;
     }
   }
-  return false;
+}
+
+function fillSlot(slot, color) {
+  numClicks++;
+  slot.classList.add(color);
+  return true;
 }
 
 /**
