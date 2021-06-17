@@ -1,5 +1,5 @@
 // elements
-const circles = document.getElementsByClassName('circle');
+const slots = document.getElementsByClassName('circle');
 const redBtn = document.getElementById('choose-red-player');
 const yellowBtn = document.getElementById('choose-yellow-player');
 const resetBtn = document.getElementById('reset');
@@ -55,41 +55,41 @@ player2.turn = 'false';
 
 /* /Objects -------------------------------------------------------- */
 
-for (let i = 0; i < circles.length; i++) {
-    const circle = circles[i];
+for (let i = 0; i < slots.length; i++) {
+    const slot = slots[i];
 
-    circle.addEventListener('mouseover', () => {
-      const colNumber = parseInt(circle.innerHTML, 10);
-
-      for (let i = numRows; i > 0; i--) {
-        let row = document.querySelector(`.grid .row:nth-child(${i})`);
-        let circle = row.childNodes[colNumber * 2 + 1];
-        circle.style.border = '4px solid black';
-      }
-    });
-
-    circle.addEventListener('mouseout', () => {
-      const colNumber = parseInt(circle.innerHTML, 10);
+    slot.addEventListener('mouseover', () => {
+      const colNumber = parseInt(slot.innerHTML, 10);
 
       for (let i = numRows; i > 0; i--) {
         let row = document.querySelector(`.grid .row:nth-child(${i})`);
-        let circle = row.childNodes[colNumber * 2 + 1];
-        circle.style.border = '2px solid black';
+        let slot = row.childNodes[colNumber * 2 + 1];
+        slot.style.border = '4px solid black';
       }
     });
 
-    circle.addEventListener('click', () => {
-      const colNumber = parseInt(circle.innerHTML, 10);
+    slot.addEventListener('mouseout', () => {
+      const colNumber = parseInt(slot.innerHTML, 10);
+
+      for (let i = numRows; i > 0; i--) {
+        let row = document.querySelector(`.grid .row:nth-child(${i})`);
+        let slot = row.childNodes[colNumber * 2 + 1];
+        slot.style.border = '2px solid black';
+      }
+    });
+
+    slot.addEventListener('click', () => {
+      const colNumber = parseInt(slot.innerHTML, 10);
 
       if (player1.turn) {
-        if (fillCircle(red, colNumber)) {
+        if (fillslot(red, colNumber)) {
           addRemoveClasses(redBtn, yellowBtn, btnDanger, btnOutlineDanger,
                           btnOutlineWarning, btnWarning)
         }
         player1.turn = false;
         player2.turn = true;
       } else {
-        if (fillCircle(yellow, colNumber)) {
+        if (fillslot(yellow, colNumber)) {
           addRemoveClasses(yellowBtn, redBtn, btnWarning, btnOutlineWarning,
                           btnOutlineDanger, btnDanger)
         }
@@ -102,57 +102,57 @@ for (let i = 0; i < circles.length; i++) {
 resetBtn.addEventListener('click', () => resetBoard());
 
 /**
- * This function determined if selected circle is filled.
+ * This function determined if selected slot is filled.
  *
- * @param {circle element} circle - Element corresponding to circle on the game board
+ * @param {slot element} slot - Element corresponding to slot on the game board
  * @return {boolean} - Boolean value
  *
  * @example
  *
- *     isFilled(circle);
+ *     isFilled(slot);
 **/
-function isFilled(circle) {
-  return circle.classList.contains(red) || circle.classList.contains(yellow);
+function isFilled(slot) {
+  return slot.classList.contains(red) || slot.classList.contains(yellow);
 }
 
 /**
- * This function clears all filled circles.
+ * This function clears all filled slots.
  *
  * @example
  *
  *     resetBoard();
 **/
 function resetBoard() {
-  for (let i = 0; i < circles.length; i++) {
-      const circle = circles[i];
-      if (circle.classList.contains(red)) {
-        circle.classList.remove(red);
-      } else if (circle.classList.contains(yellow)) {
-        circle.classList.remove(yellow);
+  for (let i = 0; i < slots.length; i++) {
+      const slot = slots[i];
+      if (slot.classList.contains(red)) {
+        slot.classList.remove(red);
+      } else if (slot.classList.contains(yellow)) {
+        slot.classList.remove(yellow);
       }
   }
 }
 
 /**
- * This function finds the lowest circle in a column that has not been filled
+ * This function finds the lowest slot in a column that has not been filled
  * and fills it.
  *
- * @param {color} circle - Color to fill a circle.
+ * @param {color} slot - Color to fill a slot.
  * @param {colNumber} color - Column number that was clicked
 
- * @return {boolean} - Returns whether a circle was filled or not
+ * @return {boolean} - Returns whether a slot was filled or not
  *
  * @example
  *
- *     fillCircle(circle, 'bg-warning');
+ *     fillslot(slot, 'bg-warning');
 **/
-function fillCircle(color, colNumber) {
+function fillslot(color, colNumber) {
   for (let i = numRows; i > 0; i--) {
     let row = document.querySelector(`.grid .row:nth-child(${i})`);
-    let circle = row.childNodes[colNumber * 2 + 1];
-    if (!isFilled(circle)) {
+    let slot = row.childNodes[colNumber * 2 + 1];
+    if (!isFilled(slot)) {
       numClicks++;
-      circle.classList.add(color);
+      slot.classList.add(color);
       return true;
     }
   }
