@@ -63,20 +63,21 @@ for (let i = 0; i < slots.length; i++) {
       lastSlotNum += 7;
     }
 
+    // bold border of current line on mouseover
     slot.addEventListener('mouseover', () => {
       for (let i = lastSlotNum; i >= 0; i -= 7) {
-        let slot = slots[i];
-        slot.style.border = '4px solid black';
+        slots[i].style.border = '4px solid black';
       }
     });
 
+    // un-bold border of current line on mouseout
     slot.addEventListener('mouseout', () => {
       for (let i = lastSlotNum; i >= 0; i -= 7) {
-        let slot = slots[i];
-        slot.style.border = '2px solid black';
+        slots[i].style.border = '2px solid black';
       }
     });
 
+    // add token to lowest slot when a slot in the column is clicked
     slot.addEventListener('click', () => {
       if (player1.turn) {
         if (fillSlot(lastSlotNum, red)) {
@@ -132,14 +133,14 @@ function resetBoard() {
  * This function finds the lowest slot in a column that has not been filled
  * and fills it.
  *
- * @param {color} slot - Color to fill a slot.
- * @param {colNumber} color - Column number that was clicked
+ * @param {color} number - Index for last slot in clicked column.
+ * @param {colNumber} color - Color to fill slot
 
  * @return {boolean} - Returns whether a slot was filled or not
  *
  * @example
  *
- *     fillSlot(slot, 'bg-warning');
+ *     fillSlot(20, 'bg-warning');
 **/
 function fillSlot(lastSlotNum, color) {
   for (let i = lastSlotNum; i >= 0; i -= 7) {
