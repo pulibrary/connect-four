@@ -81,17 +81,20 @@ for (let i = 0; i < circles.length; i++) {
     circle.addEventListener('click', () => {
       const colNumber = parseInt(circle.innerHTML, 10);
 
-      if (redBtn.classList.contains(btnDanger)) {
+      if (player1.turn) {
         if (fillCircle(red, colNumber)) {
           addRemoveClasses(redBtn, yellowBtn, btnDanger, btnOutlineDanger,
                           btnOutlineWarning, btnWarning)
         }
-
+        player1.turn = false;
+        player2.turn = true;
       } else {
         if (fillCircle(yellow, colNumber)) {
           addRemoveClasses(yellowBtn, redBtn, btnWarning, btnOutlineWarning,
                           btnOutlineDanger, btnDanger)
         }
+        player2.turn = false;
+        player1.turn = true;
       }
     });
 }
