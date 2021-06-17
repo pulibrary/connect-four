@@ -1,0 +1,110 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Connect Four</title>
+  <link rel="shortcut icon" type="image/jpeg" href="img/connect-four-icon.jpeg"/>
+  <meta name="description" content="Connect Four">
+  <meta name="author" content="Zaynab Masood">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- navbar -->
+  <nav class="navbar navbar-light navbar-expand-md navigation-clean bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">Connect Four</a>
+    </div>
+  </nav>
+  <!-- /navbar -->
+
+  <!-- grid -->
+  <main class="mb-2 mx-5 mt-3">
+    <div class="d-flex flex-column flex-wrap">
+      <div class="m-auto pt-3 pb-4">
+        <br />
+        <button type="button" class="btn btn-danger" id="choose-red-player">Red</button>
+        &nbsp;
+        <button type="button" class="btn btn-outline-warning" id="choose-yellow-player">Yellow</button>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <button type="button" class="btn btn-dark" id="reset">Reset Board</button>
+      </div>
+      <br />
+      <div class="container grid mx-auto text-center px-5 pt-4">
+        <div class="row justify-content-center">
+          <div class="circle">0</div>
+          <div class="circle">1</div>
+          <div class="circle">2</div>
+          <div class="circle">3</div>
+          <div class="circle">4</div>
+          <div class="circle">5</div>
+          <div class="circle">6</div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="circle">0</div>
+          <div class="circle">1</div>
+          <div class="circle">2</div>
+          <div class="circle">3</div>
+          <div class="circle">4</div>
+          <div class="circle">5</div>
+          <div class="circle">6</div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="circle">0</div>
+          <div class="circle">1</div>
+          <div class="circle">2</div>
+          <div class="circle">3</div>
+          <div class="circle">4</div>
+          <div class="circle">5</div>
+          <div class="circle">6</div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="circle">0</div>
+          <div class="circle">1</div>
+          <div class="circle">2</div>
+          <div class="circle">3</div>
+          <div class="circle">4</div>
+          <div class="circle">5</div>
+          <div class="circle">6</div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="circle">0</div>
+          <div class="circle">1</div>
+          <div class="circle">2</div>
+          <div class="circle">3</div>
+          <div class="circle">4</div>
+          <div class="circle">5</div>
+          <div class="circle">6</div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="circle">0</div>
+          <div class="circle">1</div>
+          <div class="circle">2</div>
+          <div class="circle">3</div>
+          <div class="circle">4</div>
+          <div class="circle">5</div>
+          <div class="circle">6</div>
+        </div>
+      </div>
+      <div id="base" class="mx-auto"></div>
+    </div>
+  </main>
+  <!-- /grid -->
+
+  <!-- footer -->
+  <footer class="footer-basic fixed-bottom bg-dark text-center pt-3">
+    <p class="copyright text-light">
+      Zaynab Masood &copy 2021
+    </p>
+  </footer>
+  <!-- /footer -->
+  <script src="game.js"></script>
+</body>
+</html>
