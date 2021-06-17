@@ -44,6 +44,11 @@ class Player {
   }
 }
 
+let player1 = new Player(red);
+player1.turn = 'true';
+let player2 = new Player(yellow);
+player2.turn = 'false';
+
 /* /Objects -------------------------------------------------------- */
 
 for (let i = 0; i < circles.length; i++) {
