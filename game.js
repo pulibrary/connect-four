@@ -84,10 +84,6 @@ resetBtn.addEventListener('click', () => resetBoard());
  *
  * @param {slot element} slot - Element corresponding to slot on the game board
  * @return {boolean} - Boolean value
- *
- * @example
- *
- *     isFilled(slot);
 **/
 function isFilled(slot) {
   return slot.classList.contains(player1.color) || slot.classList.contains(player2.color);
@@ -95,10 +91,6 @@ function isFilled(slot) {
 
 /**
  * This function clears all filled slots.
- *
- * @example
- *
- *     resetBoard();
 **/
 function resetBoard() {
   for (let i = 0; i < slots.length; i++) {
@@ -119,10 +111,6 @@ function resetBoard() {
  * @param {colNumber} color - Color to fill slot
 
  * @return {boolean} - Returns whether a slot was filled or not
- *
- * @example
- *
- *     fillSlot(20, 'bg-warning');
 **/
 function fillSlot(lastSlotNum, color) {
   for (let i = lastSlotNum; i >= 0; i -= 7) {
@@ -137,10 +125,6 @@ function fillSlot(lastSlotNum, color) {
 
 /**
  * This function updates which btn is highlighted to indicate whose turn it is.
- *
- * @example
- *
- *     switchBtns();
 **/
 function switchBtns() {
   for (let i = 0; i < playerBtns.length; i++) {
