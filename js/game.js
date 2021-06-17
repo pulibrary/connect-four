@@ -7,9 +7,9 @@ const playerBtns = document.getElementsByClassName('player-btn');
 /* ----------------------- Other Variables -----------------------*/
 
 let player1 = new Player('bg-danger');
-player1.turn = 'true';
+player1.turn = true;
 let player2 = new Player('bg-warning');
-player2.turn = 'false';
+player2.turn = false;
 
 const numColumns = 7;
 const numSlots = 42;
@@ -24,6 +24,11 @@ for (let i = 0; i < slots.length; i++) {
     let lastSlotNum = i;
     while ((lastSlotNum + 7) < 42) {
       lastSlotNum += 7;
+    }
+
+    let firstSlotNum = i;
+    while ((firstSlotNum - 7) >= 0) {
+      firstSlotNum -= 7;
     }
 
     // bold border of current line on mouseover
@@ -46,7 +51,7 @@ for (let i = 0; i < slots.length; i++) {
       if (player2.turn)
         color = player2.color;
 
-       if (fillSlot(lastSlotNum, color)) {
+       if (fillSlot(firstSlotNum, lastSlotNum, color)) {
          switchBtns();
          player1.turn = !player1.turn;
          player2.turn = !player2.turn;
@@ -90,16 +95,45 @@ function resetBoard() {
 
  * @return {boolean} - Returns whether a slot was filled or not
 **/
-function fillSlot(lastSlotNum, color) {
-  for (let i = lastSlotNum; i >= 0; i -= 7) {
+function fillSlot(firstSlotNum, lastSlotNum, color) {
+  for (let i = firstSlotNum; i <= lastSlotNum; i += numColumns) {
     let slot = slots[i];
+
+    if (isFilled(slots[firstSlotNum])) {
+      return false;
+    }
+
     if (!isFilled(slot)) {
+      slot.classList.add(color);
+      slot.classList.remove(color);
+    } else {
+      if (i - numColumns >= 0) {
+        slots[i - numColumns].classList.add(color);
+        return true;
+      } else {
+        return false
+      }
+    }
+
+    // if its the last row and its empty, u want to fill the slot
+    if (i === lastSlotNum && !isFilled(slot)) {
       slot.classList.add(color);
       return true;
     }
   }
   return false;
 }
+// function fillSlot(lastSlotNum, color) {
+//   for (let i = lastSlotNum; i >= 0; i -= 7) {
+//     let slot = slots[i];
+//     if (!isFilled(slot)) {
+//       slot.classList.add(color);
+//       return true;
+//     }
+//   }
+//   return false;
+// }
+
 
 /**
  * Updates which btn is highlighted to indicate whose turn it is.
