@@ -18,6 +18,34 @@ const disabled = 'disabled';
 const numRows = 6;
 let numClicks = 0;
 
+/* Objects -------------------------------------------------------- */
+
+class Player {
+  constructor(color) {
+    this.color = color;
+    this.wins = 0;
+    this.board = new Board(circles);
+  }
+
+  set turn(bool) {
+    this._turn = bool;
+  }
+
+  get turn() {
+    return this._turn;
+  }
+
+  updateWins() {
+    this.wins++;
+  }
+
+  getWins() {
+    return this.wins;
+  }
+}
+
+/* /Objects -------------------------------------------------------- */
+
 for (let i = 0; i < circles.length; i++) {
     const circle = circles[i];
 
