@@ -7,12 +7,12 @@ const resetBtn = document.getElementById('reset');
 // red classes
 const btnDanger= 'btn-danger';
 const btnOutlineDanger = 'btn-outline-danger';
-const bgDanger = 'bg-danger';
+const red = 'bg-danger';
 
 // yellow classes
 const btnWarning = 'btn-warning';
 const btnOutlineWarning = 'btn-outline-warning';
-const bgWarning = 'bg-warning';
+const yellow = 'bg-warning';
 
 const disabled = 'disabled';
 const numRows = 6;
@@ -78,13 +78,13 @@ for (let i = 0; i < circles.length; i++) {
       const colNumber = parseInt(circle.innerHTML, 10);
 
       if (redBtn.classList.contains(btnDanger)) {
-        if (fillCircle(bgDanger, colNumber)) {
+        if (fillCircle(red, colNumber)) {
           addRemoveClasses(redBtn, yellowBtn, btnDanger, btnOutlineDanger,
                           btnOutlineWarning, btnWarning)
         }
 
       } else {
-        if (fillCircle(bgWarning, colNumber)) {
+        if (fillCircle(yellow, colNumber)) {
           addRemoveClasses(yellowBtn, redBtn, btnWarning, btnOutlineWarning,
                           btnOutlineDanger, btnDanger)
         }
@@ -105,7 +105,7 @@ resetBtn.addEventListener('click', () => resetBoard());
  *     isFilled(circle);
 **/
 function isFilled(circle) {
-  return circle.classList.contains(bgDanger) || circle.classList.contains(bgWarning);
+  return circle.classList.contains(red) || circle.classList.contains(yellow);
 }
 
 /**
@@ -118,10 +118,10 @@ function isFilled(circle) {
 function resetBoard() {
   for (let i = 0; i < circles.length; i++) {
       const circle = circles[i];
-      if (circle.classList.contains(bgDanger)) {
-        circle.classList.remove(bgDanger);
-      } else if (circle.classList.contains(bgWarning)) {
-        circle.classList.remove(bgWarning);
+      if (circle.classList.contains(red)) {
+        circle.classList.remove(red);
+      } else if (circle.classList.contains(yellow)) {
+        circle.classList.remove(yellow);
       }
   }
 }
