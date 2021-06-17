@@ -75,25 +75,12 @@ function isFilled(slot) {
 }
 
 /**
- * Clears all filled slots.
-**/
-// function resetBoard() {
-//   for (let i = 0; i < slots.length; i++) {
-//       let slot = slots[i];
-//       if (slot.classList.contains(player1.color)) {
-//         slot.classList.remove(player1.color);
-//       } else if (slot.classList.contains(player2.color)) {
-//         slot.classList.remove(player2.color);
-//       }
-//   }
-// }
-
-/**
- * Finds the lowest slot in a column that has not been filled and fills it.
+ * Finds the lowest slot in a column that has not been filled and fill it.
  *
- * @param {color} number - Index for last slot in clicked column.
- * @param {colNumber} color - Color to fill slot
-
+ * @param {firstSlotNum} number - Index for first slot in clicked column.
+ * @param {lastSlotNum} number - Index for first slot in clicked column.
+ * @param {color} string - Color to fill slot.
+ *
  * @return {boolean} - Returns whether a slot was filled or not
 **/
 function fillSlot(firstSlotNum, lastSlotNum, color) {
@@ -124,16 +111,6 @@ function fillSlot(firstSlotNum, lastSlotNum, color) {
   }
   return false;
 }
-// function fillSlot(lastSlotNum, color) {
-//   for (let i = lastSlotNum; i >= 0; i -= 7) {
-//     let slot = slots[i];
-//     if (!isFilled(slot)) {
-//       slot.classList.add(color);
-//       return true;
-//     }
-//   }
-//   return false;
-// }
 
 
 /**
