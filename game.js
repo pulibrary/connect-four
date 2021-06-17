@@ -65,19 +65,15 @@ for (let i = 0; i < slots.length; i++) {
 
     // add token to lowest slot when a slot in the column is clicked
     slot.addEventListener('click', () => {
-      if (player1.turn) {
-        if (fillSlot(lastSlotNum, player1.color)) {
-          switchBtns();
-          player1.turn = false;
-          player2.turn = true;
-        }
-      } else {
-        if (fillSlot(lastSlotNum, player2.color)) {
-          switchBtns();
-          player2.turn = false;
-          player1.turn = true;
-        }
-      }
+      let color = player1.color;
+      if (player2.turn)
+        color = player2.color;
+
+       if (fillSlot(lastSlotNum, color)) {
+         switchBtns();
+         player1.turn = !player1.turn;
+         player2.turn = !player2.turn;
+       }
     });
 }
 
