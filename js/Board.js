@@ -3,8 +3,8 @@ class Board {
     this.slots = slots;
     this.playerBtns = playerBtns;
 
-    this.player1 = new Player('bg-danger');
-    this.player2 = new Player('bg-warning');
+    this.player1 = new Player('red');
+    this.player2 = new Player('yellow');
 
     this.player1.turn = true;
     this.player2.turn = false;
