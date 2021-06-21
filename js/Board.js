@@ -1,8 +1,9 @@
 class Board {
-  constructor(slots, color1, color2) {
+  constructor(slots, player1, player2) {
     this.slots = slots;
-    this.color1 = color1;
-    this.color2 = color2;
+    this.player1 = player1;
+    this.player2 = player2;
+    this.currentPlayer = this.player1;
   }
 
   getSlot(i) {
@@ -18,17 +19,17 @@ class Board {
   reset() {
     for (let i = 0; i < this.slots.length; i++) {
         let slot = this.slots[i];
-        if (slot.classList.contains(this.color1)) {
-          slot.classList.remove(this.color1);
-        } else if (slot.classList.contains(this.color2)) {
-          slot.classList.remove(this.color2);
+        if (slot.classList.contains(this.player1.color)) {
+          slot.classList.remove(this.player1.color);
+        } else if (slot.classList.contains(this.player2.color)) {
+          slot.classList.remove(this.player2.color);
         }
     }
   }
 
   // determines if selected slot is filled.
   slotFilled(slot) {
-    return slot.classList.contains(this.color1) || slot.classList.contains(this.color2);
+    return slot.classList.contains(this.player1.color) || slot.classList.contains(this.player2.color);
   }
 
   //
@@ -57,13 +58,15 @@ class Board {
     }
   }
 
-  // Finds the lowest slot in a column that has not been filled and fill it.
-  fillSlot(firstSlotNum, lastSlotNum, color) {
+  // finds the lowest slot in a column that has not been filled and fill it.
+  fillSlot(firstSlotNum, lastSlotNum) {
+    let color = this.currentPlayer.color;
+
     for (let i = firstSlotNum; i <= lastSlotNum; i += numColumns) {
       let slot = slots[i];
 
       if (this.slotFilled(slots[firstSlotNum])) {
-        return false;
+        return;
       }
 
       if (!this.slotFilled(slot)) {
@@ -73,9 +76,16 @@ class Board {
         if (i - numColumns >= 0) {
           slots[i - numColumns].classList.add(color);
           this.highlightTurn(playerBtns);
-          return true;
+          player1.updateTurn();
+          player2.updateTurn();
+          if (this.currentPlayer === player1) {
+            this.currentPlayer = player2;
+          } else {
+            this.currentPlayer = player1;
+          }
+          return;
         } else {
-          return false
+          return;
         }
       }
 
@@ -83,9 +93,15 @@ class Board {
       if (i === lastSlotNum && !this.slotFilled(slot)) {
         slot.classList.add(color);
         this.highlightTurn(playerBtns);
-        return true;
+        player1.updateTurn();
+        player2.updateTurn();
+        if (this.currentPlayer === player1) {
+          this.currentPlayer = player2;
+        } else {
+          this.currentPlayer = player1;
+        }
+        return;
       }
     }
-    return false;
   }
 }
