@@ -1,7 +1,7 @@
 class Board {
   constructor(slots, playerBtns) {
     this.slots = slots;
-    this.playerBtns = playerBtns;
+    this.playerBtns = = document.getElementsByClassName('player-btn');
 
     this.player1 = new Player('red');
     this.player2 = new Player('yellow');

@@ -1,7 +1,6 @@
 /* ----------------------- Element Variables -----------------------*/
 const slots = document.getElementsByClassName('circle');
 const resetBtn = document.getElementById('reset');
-const playerBtns = document.getElementsByClassName('player-btn');
 
 /* ----------------------- Other Variables -----------------------*/
 
