@@ -26,77 +26,93 @@
   <!-- /navbar -->
 
   <!-- grid -->
-  <main class="mb-2 mx-5 mt-3">
-    <div class="d-flex flex-column flex-wrap">
-      <div class="m-auto pt-3 pb-4">
+  <main class="mx-auto mt-3 d-flex flex-column flex-wrap">
+      <div class="m-auto text-center">
+        <div class="d-none">
+          <br />
+          <button type="button" class="btn btn-info" id="announce-winner"></button>
+          <br />
+          <br />
+        </div>
+        <div id="current-player">
+          <br />
+          Current Player:&nbsp;&nbsp;
+          <button type="button" class="btn btn-danger player-btn">Player 1</button>
+          <button type="button" class="btn btn-outline-danger player-btn d-none">Player 1</button>
+          &nbsp;&nbsp;
+          <button type="button" class="btn btn-warning player-btn d-none">Player 2</button>
+          <button type="button" class="btn btn-outline-warning player-btn">Player 2</button>
+          <br />
+          <br />
+        </div>
+        <div class="container grid mx-auto text-center px-5 pt-4">
+          <div class="row justify-content-center" data-row="0">
+            <div class="circle" data-col="0"></div>
+            <div class="circle" data-col="1"></div>
+            <div class="circle" data-col="2"></div>
+            <div class="circle" data-col="3"></div>
+            <div class="circle" data-col="4"></div>
+            <div class="circle" data-col="5"></div>
+            <div class="circle" data-col="6"></div>
+          </div>
+          <div class="row justify-content-center" data-row="1">
+            <div class="circle" data-col="0"></div>
+            <div class="circle" data-col="1"></div>
+            <div class="circle" data-col="2"></div>
+            <div class="circle" data-col="3"></div>
+            <div class="circle" data-col="4"></div>
+            <div class="circle" data-col="5"></div>
+            <div class="circle" data-col="6"></div>
+          </div>
+          <div class="row justify-content-center" data-row="2">
+            <div class="circle" data-col="0"></div>
+            <div class="circle" data-col="1"></div>
+            <div class="circle" data-col="2"></div>
+            <div class="circle" data-col="3"></div>
+            <div class="circle" data-col="4"></div>
+            <div class="circle" data-col="5"></div>
+            <div class="circle" data-col="6"></div>
+          </div>
+          <div class="row justify-content-center" data-row="3">
+            <div class="circle" data-col="0"></div>
+            <div class="circle" data-col="1"></div>
+            <div class="circle" data-col="2"></div>
+            <div class="circle" data-col="3"></div>
+            <div class="circle" data-col="4"></div>
+            <div class="circle" data-col="5"></div>
+            <div class="circle" data-col="6"></div>
+          </div>
+          <div class="row justify-content-center" data-row="4">
+            <div class="circle" data-col="0"></div>
+            <div class="circle" data-col="1"></div>
+            <div class="circle" data-col="2"></div>
+            <div class="circle" data-col="3"></div>
+            <div class="circle" data-col="4"></div>
+            <div class="circle" data-col="5"></div>
+            <div class="circle" data-col="6"></div>
+          </div>
+          <div class="row justify-content-center" data-row="5">
+            <div class="circle" data-col="0"></div>
+            <div class="circle" data-col="1"></div>
+            <div class="circle" data-col="2"></div>
+            <div class="circle" data-col="3"></div>
+            <div class="circle" data-col="4"></div>
+            <div class="circle" data-col="5"></div>
+            <div class="circle" data-col="6"></div>
+          </div>
+        </div>
+        <div id="base" class="mx-auto"></div>
         <br />
-        <button type="button" class="btn btn-danger player-btn">Player 1</button>
-        <button type="button" class="btn btn-outline-danger player-btn d-none">Player 1</button>
-        &nbsp;
-        <button type="button" class="btn btn-warning player-btn d-none">Player 2</button>
-        <button type="button" class="btn btn-outline-warning player-btn">Player 2</button>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <button type="button" class="btn btn-dark" id="reset">New Game</button>
-      </div>
-      <br />
-      <div class="container grid mx-auto text-center px-5 pt-4">
-        <div class="row justify-content-center" data-row="0">
-          <div class="circle" data-col="0"></div>
-          <div class="circle" data-col="1"></div>
-          <div class="circle" data-col="2"></div>
-          <div class="circle" data-col="3"></div>
-          <div class="circle" data-col="4"></div>
-          <div class="circle" data-col="5"></div>
-          <div class="circle" data-col="6"></div>
-        </div>
-        <div class="row justify-content-center" data-row="1">
-          <div class="circle" data-col="0"></div>
-          <div class="circle" data-col="1"></div>
-          <div class="circle" data-col="2"></div>
-          <div class="circle" data-col="3"></div>
-          <div class="circle" data-col="4"></div>
-          <div class="circle" data-col="5"></div>
-          <div class="circle" data-col="6"></div>
-        </div>
-        <div class="row justify-content-center" data-row="2">
-          <div class="circle" data-col="0"></div>
-          <div class="circle" data-col="1"></div>
-          <div class="circle" data-col="2"></div>
-          <div class="circle" data-col="3"></div>
-          <div class="circle" data-col="4"></div>
-          <div class="circle" data-col="5"></div>
-          <div class="circle" data-col="6"></div>
-        </div>
-        <div class="row justify-content-center" data-row="3">
-          <div class="circle" data-col="0"></div>
-          <div class="circle" data-col="1"></div>
-          <div class="circle" data-col="2"></div>
-          <div class="circle" data-col="3"></div>
-          <div class="circle" data-col="4"></div>
-          <div class="circle" data-col="5"></div>
-          <div class="circle" data-col="6"></div>
-        </div>
-        <div class="row justify-content-center" data-row="4">
-          <div class="circle" data-col="0"></div>
-          <div class="circle" data-col="1"></div>
-          <div class="circle" data-col="2"></div>
-          <div class="circle" data-col="3"></div>
-          <div class="circle" data-col="4"></div>
-          <div class="circle" data-col="5"></div>
-          <div class="circle" data-col="6"></div>
-        </div>
-        <div class="row justify-content-center" data-row="5">
-          <div class="circle" data-col="0"></div>
-          <div class="circle" data-col="1"></div>
-          <div class="circle" data-col="2"></div>
-          <div class="circle" data-col="3"></div>
-          <div class="circle" data-col="4"></div>
-          <div class="circle" data-col="5"></div>
-          <div class="circle" data-col="6"></div>
+        <br />
+        <div>
+          Player 1 wins:&nbsp;&nbsp;<button type="button" class="btn btn-dark" id="player1-wins">0</button>
+          &nbsp;&nbsp;
+          Player 2 wins:&nbsp;&nbsp;<button type="button" class="btn btn-dark" id="player2-wins">0</button>
+          &nbsp;&nbsp;
+          Start a new game:&nbsp;&nbsp;
+          <button type="button" class="btn btn-success" id="reset">Reset Board</button>
         </div>
       </div>
-      <div id="base" class="mx-auto"></div>
-    </div>
   </main>
   <!-- /grid -->
 
