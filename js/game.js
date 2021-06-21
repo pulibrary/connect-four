@@ -10,7 +10,7 @@ let player1 = new Player('bg-danger');
 player1.turn = true;
 let player2 = new Player('bg-warning');
 player2.turn = false;
-let board = new Board(slots, player1, player2);
+let board = new Board(slots, player1, player2, playerBtns);
 
 const numColumns = 7;
 const numSlots = 42;

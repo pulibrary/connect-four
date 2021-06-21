@@ -1,9 +1,10 @@
 class Board {
-  constructor(slots, player1, player2) {
+  constructor(slots, player1, player2, playerBtns) {
     this.slots = slots;
     this.player1 = player1;
     this.player2 = player2;
     this.currentPlayer = this.player1;
+    this.playerBtns = playerBtns;
   }
 
   getSlot(i) {
@@ -47,7 +48,7 @@ class Board {
   }
 
   // updates which btn is highlighted to indicate whose turn it is.
-  updateTurns(playerBtns) {
+  updateTurns() {
     for (let i = 0; i < playerBtns.length; i++) {
       let playerBtn = playerBtns[i];
       if (playerBtn.classList.contains('d-none')) {
@@ -83,7 +84,7 @@ class Board {
       } else {
         if (i - numColumns >= 0) {
           slots[i - numColumns].classList.add(color);
-          this.updateTurns(playerBtns);
+          this.updateTurns();
         }
         return;
       }
@@ -91,7 +92,7 @@ class Board {
       // if its the last row and its empty, u want to fill the slot
       if (i === lastSlotNum && !this.slotFilled(slot)) {
         slot.classList.add(color);
-        this.updateTurns(playerBtns);
+        this.updateTurns();
         return;
       }
     }
