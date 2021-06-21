@@ -46,6 +46,7 @@ for (let i = 0; i < board.length(); i++) {
       if (player2.turn)
         currentPlayer = player2;
 
+      // update turns only if slot is filled
       if (board.fillSlot(firstSlotNum, lastSlotNum, currentPlayer.color)) {
         // updates which btn is highlighted to indicate whose turn it is
         for (let i = 0; i < playerBtns.length; i++) {
