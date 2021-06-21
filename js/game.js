@@ -1,10 +1,7 @@
-/* ----------------------- Element Variables -----------------------*/
-const resetBtn = document.getElementById('reset');
-
-/* ----------------------- Other Variables -----------------------*/
+/* ----------------------- Variables -----------------------*/
 
 let board = new Board(slots, playerBtns);
-
+const resetBtn = document.getElementById('reset');
 const numColumns = 7;
 const numSlots = 42;
 
