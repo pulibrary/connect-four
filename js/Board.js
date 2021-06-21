@@ -1,6 +1,6 @@
 class Board {
   constructor(slots, playerBtns) {
-    this.slots = slots;
+    this.slots = document.getElementsByClassName('circle');
     this.playerBtns = = document.getElementsByClassName('player-btn');
 
     this.player1 = new Player('red');

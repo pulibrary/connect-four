@@ -1,5 +1,4 @@
 /* ----------------------- Element Variables -----------------------*/
-const slots = document.getElementsByClassName('circle');
 const resetBtn = document.getElementById('reset');
 
 /* ----------------------- Other Variables -----------------------*/
