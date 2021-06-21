@@ -19,4 +19,8 @@ class Player {
   getWins() {
     return this.wins;
   }
+
+  updateTurn() {
+    this.turn = !this.turn;
+  }
 }

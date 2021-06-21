@@ -51,8 +51,8 @@ for (let i = 0; i < board.length(); i++) {
         color = player2.color;
 
        if (board.fillSlot(firstSlotNum, lastSlotNum, color)) {
-         player1.turn = !player1.turn;
-         player2.turn = !player2.turn;
+         player1.updateTurn();
+         player2.updateTurn();
        }
 
     });
