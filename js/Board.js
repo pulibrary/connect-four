@@ -181,6 +181,36 @@ class Board {
           count = 0;
         }
       }
+      // for each col, check for winners left diagonally, only check bottom three rows, left four cols
+      for (let j = i - 3; j > i - 7; j--) {
+        let count = 0;
+        let slot = board.getSlot(j);
+        let color = 'red';
+
+        if (this.slotFilled(slot)) {
+          count++;
+          if (slot.classList.contains('yellow')) {
+            color = 'yellow';
+          }
+          let k = j - 7 + 1;
+          slot = board.getSlot(k);
+          while(slot.dataset.col >= 0) {
+            slot = board.getSlot(k);
+            if (this.slotFilled(slot) && slot.classList.contains(color)) {
+              count++;
+            } else {
+              break;
+            }
+            if (count == 4) {
+              console.log(color + " wins!");
+              this.currentWin = true;
+              return color;
+            }
+            k = k - 7 + 1;
+          }
+          count = 0;
+        }
+      }
     }
     return false;
   }
