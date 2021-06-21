@@ -94,7 +94,7 @@ class Board {
   checkWin() {
     // for each row
     let winner = 0;
-    for (let i = this.length() - 1; i >= 0 ; i -= 7) {
+    for (let i = this.length() - 1; i >= 0; i -= 7) {
       // for each col, check for winners horizontally
       for (let j = i; j > i - 7 ; j--) {
         let count = 0;
@@ -106,7 +106,35 @@ class Board {
           if (slot.classList.contains('yellow')) {
             color = 'yellow';
           }
-          for (let k = j - 1; k > i - 7 ; k--) {
+          for (let k = j - 1; k > i - 7; k--) {
+            slot = board.getSlot(k);
+            if (this.slotFilled(slot) && slot.classList.contains(color)) {
+              count++;
+            } else {
+              break;
+            }
+            if (count == 4) {
+              console.log(color + " wins!");
+              this.currentWin = true;
+              return color;
+            }
+          }
+          count = 0;
+        }
+      }
+
+      // for each col, check for winners vertically
+      for (let j = i; j > i - 7; j--) {
+        let count = 0;
+        let slot = board.getSlot(j);
+        let color = 'red';
+
+        if (this.slotFilled(slot)) {
+          count++;
+          if (slot.classList.contains('yellow')) {
+            color = 'yellow';
+          }
+          for (let k = j - 7; k >= 0; k -= 7) {
             slot = board.getSlot(k);
             if (this.slotFilled(slot) && slot.classList.contains(color)) {
               count++;
