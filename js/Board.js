@@ -89,50 +89,83 @@ class Board {
     return false;
   }
 
+  // get all slots of given color
+  getSlots(color) {
+    return document.getElementsByClassName(color);
+  }
 
-  // check to see if there is a win
-  checkWin() {
-    // for each row
-    let winner = 0;
-    for (let i = this.length() - 1; i >= 0; i -= 7) {
-      // for each col, check for winners horizontally
-      for (let j = i; j > i - 7 ; j--) {
-        let count = 0;
-        let slot = board.getSlot(j);
-        let color = 'red';
+  // get row
+  getRow(slot) {
+    return parseInt(slot.parentNode.dataset.row, 10);
+  }
 
-        if (this.slotFilled(slot)) {
-          count++;
-          if (slot.classList.contains('yellow')) {
-            color = 'yellow';
+  // get col
+  getCol(slot) {
+    return parseInt(slot.dataset.col, 10);
+  }
+
+  // find filled columns in each row that has a filled slot for given color
+  createRowMap(colorSlots) {
+    let rowMap = {};
+    for (let i = 0; i < colorSlots.length; i++) {
+      let slot = colorSlots[i];
+      let row = this.getRow(slot);
+
+      if (!rowMap[row]) {
+        rowMap[row] = [this.getCol(slot)];
+      } else {
+        rowMap[row].push(this.getCol(slot));
+      }
+    }
+    return rowMap;
+  }
+
+  // check horizontal wins for given color
+  checkHorizontalWin(color) {
+    let colorSlots = this.getSlots(color);
+    let rowMap = this.createRowMap(colorSlots);
+    for (const key in rowMap) {
+      const value = rowMap[key];
+      value.sort();
+      if (value.length > 3) {
+        for (let i = 0; i < value.length - 3; i++) {
+          let arr = value.slice(i, i + 4);
+          let num = arr[3];
+          if ((arr[0] + 3 === num) && (arr[1] + 2 === num) && (arr[2] + 1 === num)) {
+            return true;
           }
-          for (let k = j - 1; k > i - 7; k--) {
-            slot = board.getSlot(k);
-            if (this.slotFilled(slot) && slot.classList.contains(color)) {
-              count++;
-            } else {
-              break;
-            }
-            if (count == 4) {
-              console.log(color + " wins!");
-              this.currentWin = true;
-              return color;
-            }
-          }
-          count = 0;
         }
       }
+    }
+    return false;
+  }
+
+  // check to see if there is a win
+  checkWin(color1, color2) {
+
+    // see if there is a horizontal win
+    if (this.checkHorizontalWin(color1)) {
+      this.currentWin = true;
+      return color1;
+    }
+
+    if (this.checkHorizontalWin(color2)) {
+      this.currentWin = true;
+      return color2;
+    }
+
+    for (let i = this.length() - 1; i >= 0; i -= 7) {
 
       // for each col, check for winners vertically
       for (let j = i; j > i - 7; j--) {
         let count = 0;
         let slot = board.getSlot(j);
-        let color = 'red';
+        let color = color1;
 
         if (this.slotFilled(slot)) {
           count++;
-          if (slot.classList.contains('yellow')) {
-            color = 'yellow';
+          if (slot.classList.contains(color2)) {
+            color = color2;
           }
           for (let k = j - 7; k >= 0; k -= 7) {
             slot = board.getSlot(k);
@@ -142,7 +175,6 @@ class Board {
               break;
             }
             if (count == 4) {
-              console.log(color + " wins!");
               this.currentWin = true;
               return color;
             }
@@ -155,12 +187,12 @@ class Board {
       for (let j = i; j > i - 4; j--) {
         let count = 0;
         let slot = board.getSlot(j);
-        let color = 'red';
+        let color = color1;
 
         if (this.slotFilled(slot)) {
           count++;
-          if (slot.classList.contains('yellow')) {
-            color = 'yellow';
+          if (slot.classList.contains(color2)) {
+            color = color2;
           }
           let k = j - 7 - 1;
           slot = board.getSlot(k);
@@ -172,7 +204,6 @@ class Board {
               break;
             }
             if (count == 4) {
-              console.log(color + " wins!");
               this.currentWin = true;
               return color;
             }
@@ -185,12 +216,12 @@ class Board {
       for (let j = i - 3; j > i - 7; j--) {
         let count = 0;
         let slot = board.getSlot(j);
-        let color = 'red';
+        let color = color1;
 
         if (this.slotFilled(slot)) {
           count++;
-          if (slot.classList.contains('yellow')) {
-            color = 'yellow';
+          if (slot.classList.contains(color2)) {
+            color = color2;
           }
           let k = j - 7 + 1;
           slot = board.getSlot(k);
@@ -202,7 +233,6 @@ class Board {
               break;
             }
             if (count == 4) {
-              console.log(color + " wins!");
               this.currentWin = true;
               return color;
             }
