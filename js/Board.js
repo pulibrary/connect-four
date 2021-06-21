@@ -62,7 +62,7 @@ class Board {
 
     this.player1.updateTurn();
     this.player2.updateTurn();
-    if (this.currentPlayer === this.player1)
+    if (this.player1.turn)
       this.currentPlayer = this.player2;
     else
       this.currentPlayer = this.player1;
