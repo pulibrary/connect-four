@@ -26,26 +26,19 @@
   <!-- /navbar -->
 
   <!-- grid -->
-  <main class="mb-2 mx-5 mt-5 d-flex flex-col flex-wrap pt-5">
-      <div class="m-auto pt-5">
-        <br /> Current Player:&nbsp;&nbsp;
-        <button type="button" class="btn btn-danger player-btn">Player 1</button>
-        <button type="button" class="btn btn-outline-danger player-btn d-none">Player 1</button>
-        &nbsp;
-        <button type="button" class="btn btn-warning player-btn d-none">Player 2</button>
-        <button type="button" class="btn btn-outline-warning player-btn">Player 2</button>
-        <br />
-        <br />
-        Start a new game:&nbsp;&nbsp;
-        <button type="button" class="btn btn-success" id="reset">Reset Board</button>
-        <br />
-        <br />
-        Player 1 wins:&nbsp;&nbsp;<button type="button" class="btn btn-dark" id="player1-wins">0</button>&nbsp;&nbsp;
-        Player 2 wins:&nbsp;&nbsp;<button type="button" class="btn btn-dark" id="player2-wins">0</button>
-        <p id="announce-winner"></p>
-      </div>
-      <br />
-      <div class="m-auto pt-5">
+  <main class="mb-2 mx-5 mt-5 d-flex flex-column flex-wrap pt-5">
+      <div class="m-auto text-center">
+        <p class="text-center" id="announce-winner"></p>
+        <div>
+          Current Player:&nbsp;&nbsp;
+          <button type="button" class="btn btn-danger player-btn">Player 1</button>
+          <button type="button" class="btn btn-outline-danger player-btn d-none">Player 1</button>
+          &nbsp;&nbsp;
+          <button type="button" class="btn btn-warning player-btn d-none">Player 2</button>
+          <button type="button" class="btn btn-outline-warning player-btn">Player 2</button>
+          <br />
+          <br />
+        </div>
         <div class="container grid mx-auto text-center px-5 pt-4">
           <div class="row justify-content-center" data-row="0">
             <div class="circle" data-col="0"></div>
@@ -103,6 +96,16 @@
           </div>
         </div>
         <div id="base" class="mx-auto"></div>
+        <br />
+        <br />
+        <div>
+          Player 1 wins:&nbsp;&nbsp;<button type="button" class="btn btn-dark" id="player1-wins">0</button>
+          &nbsp;&nbsp;
+          Player 2 wins:&nbsp;&nbsp;<button type="button" class="btn btn-dark" id="player2-wins">0</button>
+          &nbsp;&nbsp;
+          Start a new game:&nbsp;&nbsp;
+          <button type="button" class="btn btn-success" id="reset">Reset Board</button>
+        </div>
       </div>
   </main>
   <!-- /grid -->

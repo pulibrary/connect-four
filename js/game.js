@@ -57,10 +57,10 @@ for (let i = 0; i < board.length(); i++) {
         let message = '';
         if (winner) {
           if (winner === player1.color) {
-            message = 'Player 1 wins!';
+            message = '<br />Player 1 wins!';
             player1.updateWins(1);
           } else {
-            message = 'Player 2 wins!';
+            message = '<br />Player 2 wins!';
             player2.updateWins(1);
           }
           player1Wins.innerHTML = player1.getWins();
