@@ -1,10 +1,15 @@
 class Board {
-  constructor(slots, player1, player2, playerBtns) {
+  constructor(slots, playerBtns) {
     this.slots = slots;
-    this.player1 = player1;
-    this.player2 = player2;
-    this.currentPlayer = this.player1;
     this.playerBtns = playerBtns;
+
+    this.player1 = new Player('bg-danger');
+    this.player2 = new Player('bg-warning');
+
+    this.player1.turn = true;
+    this.player2.turn = false;
+
+    this.currentPlayer = this.player1;
   }
 
   getSlot(i) {
@@ -58,12 +63,12 @@ class Board {
       }
     }
 
-    player1.updateTurn();
-    player2.updateTurn();
-    if (this.currentPlayer === player1) {
-      this.currentPlayer = player2;
+    this.player1.updateTurn();
+    this.player2.updateTurn();
+    if (this.currentPlayer === this.player1) {
+      this.currentPlayer = this.player2;
     } else {
-      this.currentPlayer = player1;
+      this.currentPlayer = this.player1;
     }
   }
 

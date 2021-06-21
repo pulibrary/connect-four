@@ -6,15 +6,10 @@ const playerBtns = document.getElementsByClassName('player-btn');
 
 /* ----------------------- Other Variables -----------------------*/
 
-let player1 = new Player('bg-danger');
-player1.turn = true;
-let player2 = new Player('bg-warning');
-player2.turn = false;
-let board = new Board(slots, player1, player2, playerBtns);
+let board = new Board(slots, playerBtns);
 
 const numColumns = 7;
 const numSlots = 42;
-let lastSlots = [];
 
 /* ----------------------- Event Handling -----------------------*/
 
