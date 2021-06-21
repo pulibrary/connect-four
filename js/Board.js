@@ -140,6 +140,38 @@ class Board {
     return false;
   }
 
+  // check vertical wins for given color
+  checkVerticalWin(color) {
+    for (let i = this.length() - 1; i >= 0; i -= 7) {
+      for (let j = i; j > i - 7; j--) {
+        let count = 0;
+        let slot = board.getSlot(j);
+
+        if (this.slotFilled(slot) && slot.classList.contains(color)) {
+          count++;
+          for (let k = j - 7; k >= 0; k -= 7) {
+            slot = board.getSlot(k);
+            if (this.slotFilled(slot) && slot.classList.contains(color)) {
+              count++;
+            } else {
+              break;
+            }
+            if (count == 4) {
+              return true;
+            }
+          }
+          count = 0;
+        }
+      }
+    }
+    return false;
+  }
+
+  // check diagonal wins for given color
+  checkDiagonalWin(color) {
+    return false;
+  }
+
   // check to see if there is a win
   checkWin(color1, color2) {
 
@@ -154,34 +186,31 @@ class Board {
       return color2;
     }
 
+    // see if there is a vertical win
+    if (this.checkVerticalWin(color2)) {
+      this.currentWin = true;
+      return color2;
+    }
+
+    if (this.checkVerticalWin(color1)) {
+      this.currentWin = true;
+      return color2;
+    }
+
+    // see if there is a diagonal win
+    if (this.checkDiagonalWin(color1)) {
+      this.currentWin = true;
+      return color2;
+    }
+
+    if (this.checkDiagonalWin(color2)) {
+      this.currentWin = true;
+      return color2;
+    }
+
     for (let i = this.length() - 1; i >= 0; i -= 7) {
 
-      // for each col, check for winners vertically
-      for (let j = i; j > i - 7; j--) {
-        let count = 0;
-        let slot = board.getSlot(j);
-        let color = color1;
 
-        if (this.slotFilled(slot)) {
-          count++;
-          if (slot.classList.contains(color2)) {
-            color = color2;
-          }
-          for (let k = j - 7; k >= 0; k -= 7) {
-            slot = board.getSlot(k);
-            if (this.slotFilled(slot) && slot.classList.contains(color)) {
-              count++;
-            } else {
-              break;
-            }
-            if (count == 4) {
-              this.currentWin = true;
-              return color;
-            }
-          }
-          count = 0;
-        }
-      }
 
       // for each col, check for winners left diagonally, only check bottom three rows, right four cols
       for (let j = i; j > i - 4; j--) {
