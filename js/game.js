@@ -1,7 +1,13 @@
 /* ----------------------- Variables -----------------------*/
 
-let board = new Board(slots, playerBtns);
+const player1 = new Player('red');
+const player2 = new Player('yellow');
+player1.turn = true;
+player2.turn = false;
+const board = new Board(player1, player2);
+
 const resetBtn = document.getElementById('reset');
+const playerBtns = document.getElementsByClassName('player-btn');
 const numColumns = 7;
 const numSlots = 42;
 
@@ -36,6 +42,24 @@ for (let i = 0; i < board.length(); i++) {
 
     // add token to lowest slot when a slot in the column is clicked
     slot.addEventListener('click', () => {
-      board.fillSlot(firstSlotNum, lastSlotNum)
+      if (board.fillSlot(firstSlotNum, lastSlotNum)) {
+        // updates which btn is highlighted to indicate whose turn it is
+        for (let i = 0; i < playerBtns.length; i++) {
+          let playerBtn = playerBtns[i];
+          if (playerBtn.classList.contains('d-none'))
+            playerBtn.classList.remove('d-none');
+          else
+            playerBtn.classList.add('d-none')
+        }
+
+
+        if (player1.turn)
+          board.currentPlayer = player2;
+        else
+          board.currentPlayer = player1;
+
+        player1.updateTurn();
+        player2.updateTurn();
+      }
     });
 }
