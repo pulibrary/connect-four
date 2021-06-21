@@ -1,6 +1,7 @@
 class Board {
   constructor() {
     this.slots = document.getElementsByClassName('circle');
+    this.currentWin = false;
   }
 
   // returns slot at index i
@@ -11,6 +12,16 @@ class Board {
   // returns board's length
   length() {
     return this.slots.length;
+  }
+
+  //
+  get _currentWin() {
+    return this._currentWin;
+  }
+
+  //
+  set _currentWin(bool) {
+    this._currentWin = bool;
   }
 
   // clears all filled slots
@@ -44,6 +55,10 @@ class Board {
 
   // finds the lowest slot in a column that has not been filled and fill it
   fillSlot(firstSlotNum, lastSlotNum, color) {
+    if (this.currentWin) {
+      return false;
+    }
+
     for (let i = firstSlotNum; i <= lastSlotNum; i += numColumns) {
       let slot = this.getSlot(i);
 
@@ -59,9 +74,6 @@ class Board {
           let prevSlot = this.getSlot(i - numColumns);
           prevSlot.classList.add(color);
           prevSlot.classList.add('filled');
-          if (board.checkWin()) {
-            return false;
-          }
           return true;
         }
         return false;
@@ -71,17 +83,46 @@ class Board {
       if (i === lastSlotNum && !this.slotFilled(slot)) {
         slot.classList.add(color);
         slot.classList.add('filled');
-        if (board.checkWin()) {
-          return false;
-        }
         return true;
       }
     }
     return false;
   }
 
+
   // check to see if there is a win
   checkWin() {
+    // for each row
+    let winner = 0;
+    for (let i = this.length() - 1; i >= 0 ; i -= 7) {
+      // for each col, check for winners horizontally
+      for (let j = i; j > i - 7 ; j--) {
+        let count = 0;
+        let slot = board.getSlot(j);
+        let color = 'red';
+
+        if (this.slotFilled(slot)) {
+          count++;
+          if (slot.classList.contains('yellow')) {
+            color = 'yellow';
+          }
+          for (let k = j - 1; k > i - 7 ; k--) {
+            slot = board.getSlot(k);
+            if (this.slotFilled(slot) && slot.classList.contains(color)) {
+              count++;
+            } else {
+              break;
+            }
+            if (count == 4) {
+              console.log(color + " wins!");
+              this.currentWin = true;
+              return color;
+            }
+          }
+          count = 0;
+        }
+      }
+    }
     return false;
   }
 }
