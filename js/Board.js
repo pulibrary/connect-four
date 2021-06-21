@@ -1,11 +1,6 @@
 class Board {
-  constructor(player1, player2) {
+  constructor() {
     this.slots = document.getElementsByClassName('circle');
-
-    this.player1 = player1;
-    this.player2 = player2;
-
-    this.currentPlayer = this.player1;
   }
 
   // returns slot at index i
@@ -19,11 +14,11 @@ class Board {
   }
 
   // clears all filled slots
-  reset() {
+  reset(color1, color2) {
     for (let i = 0; i < this.length(); i++) {
         let slot = this.getSlot(i);
-        slot.classList.remove(this.player1.color);
-        slot.classList.remove(this.player2.color);
+        slot.classList.remove(color1);
+        slot.classList.remove(color2);
         slot.classList.remove('filled');
     }
   }
@@ -48,9 +43,7 @@ class Board {
   }
 
   // finds the lowest slot in a column that has not been filled and fill it
-  fillSlot(firstSlotNum, lastSlotNum) {
-    let color = this.currentPlayer.color;
-
+  fillSlot(firstSlotNum, lastSlotNum, color) {
     for (let i = firstSlotNum; i <= lastSlotNum; i += numColumns) {
       let slot = this.getSlot(i);
 
