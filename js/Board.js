@@ -1,15 +1,6 @@
 class Board {
-  constructor(slots, playerBtns) {
-    this.slots = slots;
-    this.playerBtns = playerBtns;
-
-    this.player1 = new Player('bg-danger');
-    this.player2 = new Player('bg-warning');
-
-    this.player1.turn = true;
-    this.player2.turn = false;
-
-    this.currentPlayer = this.player1;
+  constructor() {
+    this.slots = document.getElementsByClassName('circle');
   }
 
   // returns slot at index i
@@ -23,11 +14,11 @@ class Board {
   }
 
   // clears all filled slots
-  reset() {
+  reset(color1, color2) {
     for (let i = 0; i < this.length(); i++) {
         let slot = this.getSlot(i);
-        slot.classList.remove(this.player1.color);
-        slot.classList.remove(this.player2.color);
+        slot.classList.remove(color1);
+        slot.classList.remove(color2);
         slot.classList.remove('filled');
     }
   }
@@ -51,38 +42,13 @@ class Board {
     }
   }
 
-  // updates which btn is highlighted to indicate whose turn it is
-  updateTurns() {
-    // if there is a win, don't update next turn
-    if (board.checkWin())
-      return;
-
-    for (let i = 0; i < playerBtns.length; i++) {
-      let playerBtn = playerBtns[i];
-      if (playerBtn.classList.contains('d-none'))
-        playerBtn.classList.remove('d-none');
-      else
-        playerBtn.classList.add('d-none')
-    }
-
-    if (this.player1.turn)
-      this.currentPlayer = this.player2;
-    else
-      this.currentPlayer = this.player1;
-
-    this.player1.updateTurn();
-    this.player2.updateTurn();
-  }
-
   // finds the lowest slot in a column that has not been filled and fill it
-  fillSlot(firstSlotNum, lastSlotNum) {
-    let color = this.currentPlayer.color;
-
+  fillSlot(firstSlotNum, lastSlotNum, color) {
     for (let i = firstSlotNum; i <= lastSlotNum; i += numColumns) {
       let slot = this.getSlot(i);
 
-      if (this.slotFilled(slots[firstSlotNum])) {
-        return;
+      if (this.slotFilled(this.getSlot(firstSlotNum))) {
+        return false;
       }
 
       if (!this.slotFilled(slot)) {
@@ -93,19 +59,25 @@ class Board {
           let prevSlot = this.getSlot(i - numColumns);
           prevSlot.classList.add(color);
           prevSlot.classList.add('filled');
-          this.updateTurns();
+          if (board.checkWin()) {
+            return false;
+          }
+          return true;
         }
-        return;
+        return false;
       }
 
-      // if its the last row and its empty, u want to fill the slot
+      // if it's the last row and its empty, u want to fill the slot
       if (i === lastSlotNum && !this.slotFilled(slot)) {
         slot.classList.add(color);
         slot.classList.add('filled');
-        this.updateTurns();
-        return;
+        if (board.checkWin()) {
+          return false;
+        }
+        return true;
       }
     }
+    return false;
   }
 
   // check to see if there is a win
