@@ -50,8 +50,12 @@ class Board {
     }
   }
 
-  // updates which btn is highlighted to indicate whose turn it is.
+  // updates which btn is highlighted to indicate whose turn it is
   updateTurns() {
+    // if there is a win, don't update next turn
+    if (board.checkWin())
+      return;
+
     for (let i = 0; i < playerBtns.length; i++) {
       let playerBtn = playerBtns[i];
       if (playerBtn.classList.contains('d-none'))
@@ -69,7 +73,7 @@ class Board {
     this.player2.updateTurn();
   }
 
-  // finds the lowest slot in a column that has not been filled and fill it.
+  // finds the lowest slot in a column that has not been filled and fill it
   fillSlot(firstSlotNum, lastSlotNum) {
     let color = this.currentPlayer.color;
 
@@ -100,5 +104,10 @@ class Board {
         return;
       }
     }
+  }
+
+  // check to see if there is a win
+  checkWin() {
+    return false;
   }
 }
