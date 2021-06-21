@@ -12,6 +12,7 @@ class Board {
     this.currentPlayer = this.player1;
   }
 
+  // returns slot at index i
   getSlot(i) {
     return this.slots[i];
   }
@@ -23,8 +24,8 @@ class Board {
 
   // clears all filled slots
   reset() {
-    for (let i = 0; i < this.slots.length; i++) {
-        let slot = this.slots[i];
+    for (let i = 0; i < this.length(); i++) {
+        let slot = this.getSlot(i);
         slot.classList.remove(this.player1.color);
         slot.classList.remove(this.player2.color);
         slot.classList.remove('filled');
