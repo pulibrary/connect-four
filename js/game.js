@@ -29,12 +29,12 @@ for (let i = 0; i < board.length(); i++) {
       firstSlotNum -= numColumns;
     }
 
-    // unbold border of slots of column on mouseout
+    // bold border of slots in column on mouseout
     slot.addEventListener('mouseover', () => {
       board.boldColumn(lastSlotNum);
     });
 
-    // unbold border of slots of column on mouseout
+    // unbold border of slots in column on mouseout
     slot.addEventListener('mouseout', () => {
       board.unboldColumn(lastSlotNum);
     });

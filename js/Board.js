@@ -36,7 +36,7 @@ class Board {
     return slot.classList.contains('filled');
   }
 
-  //
+  // bold border of slots in column
   boldColumn(lastSlotNum) {
     for (let i = lastSlotNum; i >= 0; i -= 7) {
       this.getSlot(i).style.border = '4px solid black';
