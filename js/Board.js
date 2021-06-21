@@ -79,7 +79,7 @@ class Board {
     let color = this.currentPlayer.color;
 
     for (let i = firstSlotNum; i <= lastSlotNum; i += numColumns) {
-      let slot = slots[i];
+      let slot = this.getSlot(i);
 
       if (this.slotFilled(slots[firstSlotNum])) {
         return;
@@ -90,8 +90,9 @@ class Board {
         slot.classList.remove(color);
       } else {
         if (i - numColumns >= 0) {
-          slots[i - numColumns].classList.add(color);
-          slots[i - numColumns].classList.add('filled');
+          let prevSlot = this.getSlot(i - numColumns);
+          prevSlot.classList.add(color);
+          prevSlot.classList.add('filled');
           this.updateTurns();
         }
         return;
