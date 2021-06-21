@@ -18,17 +18,14 @@ resetBtn.addEventListener('click', () => board.reset(player1.color, player2.colo
 for (let i = 0; i < board.length(); i++) {
     const slot = board.getSlot(i);
 
-    // find index for last slot in current column
-    let lastSlotNum = i;
-    while ((lastSlotNum + numColumns) < numSlots) {
-      lastSlotNum += numColumns;
-    }
+    const row = parseInt(slot.parentNode.dataset.row, 10);
+    const col = parseInt(slot.dataset.col, 10);
 
     // find index for first slot in current column
-    let firstSlotNum = i;
-    while ((firstSlotNum - numColumns) >= 0) {
-      firstSlotNum -= numColumns;
-    }
+    let firstSlotNum = col + (7 * 0);
+
+    // find index for last slot in current column
+    let lastSlotNum = col + (7 * 5);
 
     // bold border of slots in column on mouseout
     slot.addEventListener('mouseover', () => {
