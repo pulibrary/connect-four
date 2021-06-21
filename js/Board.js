@@ -67,7 +67,7 @@ class Board {
         return false;
       }
 
-      // if its the last row and its empty, u want to fill the slot
+      // if it's the last row and its empty, u want to fill the slot
       if (i === lastSlotNum && !this.slotFilled(slot)) {
         slot.classList.add(color);
         slot.classList.add('filled');
