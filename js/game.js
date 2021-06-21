@@ -10,6 +10,7 @@ board.currentWin = false;
 const announceWinner = document.getElementById('announce-winner');
 const player1Wins = document.getElementById('player1-wins');
 const player2Wins = document.getElementById('player2-wins');
+const currentPlayerDiv = document.getElementById('current-player');
 const resetBtn = document.getElementById('reset');
 const playerBtns = document.getElementsByClassName('player-btn');
 const numColumns = 7;
@@ -21,6 +22,7 @@ resetBtn.addEventListener('click', () => {
   board.reset(player1.color, player2.color)
   announceWinner.innerHTML = '';
   board.currentWin = false;
+  currentPlayerDiv.classList.remove('d-none');
 });
 
 for (let i = 0; i < board.length(); i++) {
@@ -57,12 +59,13 @@ for (let i = 0; i < board.length(); i++) {
         let message = '';
         if (winner) {
           if (winner === player1.color) {
-            message = '<br />Player 1 wins!';
+            message = '<br />Player 1 wins!<br /><br />';
             player1.updateWins(1);
           } else {
-            message = '<br />Player 2 wins!';
+            message = '<br />Player 2 wins!<br /><br />';
             player2.updateWins(1);
           }
+          currentPlayerDiv.classList.add('d-none');
           player1Wins.innerHTML = player1.getWins();
           player2Wins.innerHTML = player2.getWins();
           announceWinner.innerHTML = message;
