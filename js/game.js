@@ -19,13 +19,13 @@ for (let i = 0; i < board.length(); i++) {
 
     // find index for last slot in current column
     let lastSlotNum = i;
-    while ((lastSlotNum + 7) < 42) {
-      lastSlotNum += 7;
+    while ((lastSlotNum + numColumns) < numSlots) {
+      lastSlotNum += numColumns;
     }
 
     let firstSlotNum = i;
-    while ((firstSlotNum - 7) >= 0) {
-      firstSlotNum -= 7;
+    while ((firstSlotNum - numColumns) >= 0) {
+      firstSlotNum -= numColumns;
     }
 
     // unbold border of slots of column on mouseout
