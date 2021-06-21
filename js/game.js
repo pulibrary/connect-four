@@ -56,7 +56,7 @@ for (let i = 0; i < board.length(); i++) {
 
       // update turns only if slot is filled
       if (board.fillSlot(firstSlotNum, lastSlotNum, currentPlayer.color)) {
-        let winner = board.checkWin();
+        let winner = board.checkWin(player1.color, player2.color);
         let message = '';
         if (winner) {
           if (winner === player1.color) {
