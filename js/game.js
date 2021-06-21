@@ -23,6 +23,7 @@ for (let i = 0; i < board.length(); i++) {
       lastSlotNum += numColumns;
     }
 
+    // find index for first slot in current column
     let firstSlotNum = i;
     while ((firstSlotNum - numColumns) >= 0) {
       firstSlotNum -= numColumns;
