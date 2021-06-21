@@ -25,17 +25,15 @@ class Board {
   reset() {
     for (let i = 0; i < this.slots.length; i++) {
         let slot = this.slots[i];
-        if (slot.classList.contains(this.player1.color)) {
-          slot.classList.remove(this.player1.color);
-        } else if (slot.classList.contains(this.player2.color)) {
-          slot.classList.remove(this.player2.color);
-        }
+        slot.classList.remove(this.player1.color);
+        slot.classList.remove(this.player2.color);
     }
   }
 
   // determines if selected slot is filled.
   slotFilled(slot) {
-    return slot.classList.contains(this.player1.color) || slot.classList.contains(this.player2.color);
+    return slot.classList.contains(this.player1.color) ||
+           slot.classList.contains(this.player2.color);
   }
 
   //
