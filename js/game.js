@@ -10,7 +10,7 @@ let player1 = new Player('bg-danger');
 player1.turn = true;
 let player2 = new Player('bg-warning');
 player2.turn = false;
-let board = new Board(slots);
+let board = new Board(slots, player1.color, player2.color);
 
 const numColumns = 7;
 const numSlots = 42;
@@ -34,18 +34,14 @@ for (let i = 0; i < board.length(); i++) {
       firstSlotNum -= 7;
     }
 
-    // bold border of current line on mouseover
+    // unbold border of slots of column on mouseout
     slot.addEventListener('mouseover', () => {
-      for (let i = lastSlotNum; i >= 0; i -= 7) {
-        board.getSlot(i).style.border = '4px solid black';
-      }
+      board.boldColumn(lastSlotNum);
     });
 
-    // un-bold border of current line on mouseout
+    // unbold border of slots of column on mouseout
     slot.addEventListener('mouseout', () => {
-      for (let i = lastSlotNum; i >= 0; i -= 7) {
-        board.getSlot(i).style.border = '2px solid black';
-      }
+      board.unboldColumn(lastSlotNum);
     });
 
     // add token to lowest slot when a slot in the column is clicked
@@ -55,7 +51,6 @@ for (let i = 0; i < board.length(); i++) {
         color = player2.color;
 
        if (board.fillSlot(firstSlotNum, lastSlotNum, color)) {
-         board.highlightTurn(playerBtns);
          player1.turn = !player1.turn;
          player2.turn = !player2.turn;
        }
