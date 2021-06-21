@@ -47,7 +47,7 @@ class Board {
   }
 
   // updates which btn is highlighted to indicate whose turn it is.
-  highlightTurn(playerBtns) {
+  updateTurns(playerBtns) {
     for (let i = 0; i < playerBtns.length; i++) {
       let playerBtn = playerBtns[i];
       if (playerBtn.classList.contains('d-none')) {
@@ -55,6 +55,14 @@ class Board {
       } else {
         playerBtn.classList.add('d-none')
       }
+    }
+
+    player1.updateTurn();
+    player2.updateTurn();
+    if (this.currentPlayer === player1) {
+      this.currentPlayer = player2;
+    } else {
+      this.currentPlayer = player1;
     }
   }
 
@@ -75,31 +83,15 @@ class Board {
       } else {
         if (i - numColumns >= 0) {
           slots[i - numColumns].classList.add(color);
-          this.highlightTurn(playerBtns);
-          player1.updateTurn();
-          player2.updateTurn();
-          if (this.currentPlayer === player1) {
-            this.currentPlayer = player2;
-          } else {
-            this.currentPlayer = player1;
-          }
-          return;
-        } else {
-          return;
+          this.updateTurns(playerBtns);
         }
+        return;
       }
 
       // if its the last row and its empty, u want to fill the slot
       if (i === lastSlotNum && !this.slotFilled(slot)) {
         slot.classList.add(color);
-        this.highlightTurn(playerBtns);
-        player1.updateTurn();
-        player2.updateTurn();
-        if (this.currentPlayer === player1) {
-          this.currentPlayer = player2;
-        } else {
-          this.currentPlayer = player1;
-        }
+        this.updateTurns(playerBtns);
         return;
       }
     }
