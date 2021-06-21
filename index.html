@@ -26,81 +26,84 @@
   <!-- /navbar -->
 
   <!-- grid -->
-  <main class="mb-2 mx-5 mt-3">
-    <div class="d-flex flex-column flex-wrap">
-      <div class="m-auto pt-3 pb-4">
-        <br />
+  <main class="mb-2 mx-5 mt-5 d-flex flex-col flex-wrap pt-5">
+      <div class="m-auto pt-5">
+        <br /> Current Player:&nbsp;&nbsp;
         <button type="button" class="btn btn-danger player-btn">Player 1</button>
         <button type="button" class="btn btn-outline-danger player-btn d-none">Player 1</button>
         &nbsp;
         <button type="button" class="btn btn-warning player-btn d-none">Player 2</button>
         <button type="button" class="btn btn-outline-warning player-btn">Player 2</button>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <button type="button" class="btn btn-dark" id="reset">New Game</button>
-      </div>
-      <div class="m-auto">
-        <p>Player 1 wins: <span id="player1-wins">0</span>, Player 2 wins: <span id="player2-wins">0</span></p><br />
+        <br />
+        <br />
+        Start a new game:&nbsp;&nbsp;
+        <button type="button" class="btn btn-success" id="reset">Reset Board</button>
+        <br />
+        <br />
+        Player 1 wins:&nbsp;&nbsp;<button type="button" class="btn btn-dark" id="player1-wins">0</button>&nbsp;&nbsp;
+        Player 2 wins:&nbsp;&nbsp;<button type="button" class="btn btn-dark" id="player2-wins">0</button>
         <p id="announce-winner"></p>
       </div>
       <br />
-      <div class="container grid mx-auto text-center px-5 pt-4">
-        <div class="row justify-content-center" data-row="0">
-          <div class="circle" data-col="0"></div>
-          <div class="circle" data-col="1"></div>
-          <div class="circle" data-col="2"></div>
-          <div class="circle" data-col="3"></div>
-          <div class="circle" data-col="4"></div>
-          <div class="circle" data-col="5"></div>
-          <div class="circle" data-col="6"></div>
+      <div class="m-auto pt-5">
+        <div class="container grid mx-auto text-center px-5 pt-4">
+          <div class="row justify-content-center" data-row="0">
+            <div class="circle" data-col="0"></div>
+            <div class="circle" data-col="1"></div>
+            <div class="circle" data-col="2"></div>
+            <div class="circle" data-col="3"></div>
+            <div class="circle" data-col="4"></div>
+            <div class="circle" data-col="5"></div>
+            <div class="circle" data-col="6"></div>
+          </div>
+          <div class="row justify-content-center" data-row="1">
+            <div class="circle" data-col="0"></div>
+            <div class="circle" data-col="1"></div>
+            <div class="circle" data-col="2"></div>
+            <div class="circle" data-col="3"></div>
+            <div class="circle" data-col="4"></div>
+            <div class="circle" data-col="5"></div>
+            <div class="circle" data-col="6"></div>
+          </div>
+          <div class="row justify-content-center" data-row="2">
+            <div class="circle" data-col="0"></div>
+            <div class="circle" data-col="1"></div>
+            <div class="circle" data-col="2"></div>
+            <div class="circle" data-col="3"></div>
+            <div class="circle" data-col="4"></div>
+            <div class="circle" data-col="5"></div>
+            <div class="circle" data-col="6"></div>
+          </div>
+          <div class="row justify-content-center" data-row="3">
+            <div class="circle" data-col="0"></div>
+            <div class="circle" data-col="1"></div>
+            <div class="circle" data-col="2"></div>
+            <div class="circle" data-col="3"></div>
+            <div class="circle" data-col="4"></div>
+            <div class="circle" data-col="5"></div>
+            <div class="circle" data-col="6"></div>
+          </div>
+          <div class="row justify-content-center" data-row="4">
+            <div class="circle" data-col="0"></div>
+            <div class="circle" data-col="1"></div>
+            <div class="circle" data-col="2"></div>
+            <div class="circle" data-col="3"></div>
+            <div class="circle" data-col="4"></div>
+            <div class="circle" data-col="5"></div>
+            <div class="circle" data-col="6"></div>
+          </div>
+          <div class="row justify-content-center" data-row="5">
+            <div class="circle" data-col="0"></div>
+            <div class="circle" data-col="1"></div>
+            <div class="circle" data-col="2"></div>
+            <div class="circle" data-col="3"></div>
+            <div class="circle" data-col="4"></div>
+            <div class="circle" data-col="5"></div>
+            <div class="circle" data-col="6"></div>
+          </div>
         </div>
-        <div class="row justify-content-center" data-row="1">
-          <div class="circle" data-col="0"></div>
-          <div class="circle" data-col="1"></div>
-          <div class="circle" data-col="2"></div>
-          <div class="circle" data-col="3"></div>
-          <div class="circle" data-col="4"></div>
-          <div class="circle" data-col="5"></div>
-          <div class="circle" data-col="6"></div>
-        </div>
-        <div class="row justify-content-center" data-row="2">
-          <div class="circle" data-col="0"></div>
-          <div class="circle" data-col="1"></div>
-          <div class="circle" data-col="2"></div>
-          <div class="circle" data-col="3"></div>
-          <div class="circle" data-col="4"></div>
-          <div class="circle" data-col="5"></div>
-          <div class="circle" data-col="6"></div>
-        </div>
-        <div class="row justify-content-center" data-row="3">
-          <div class="circle" data-col="0"></div>
-          <div class="circle" data-col="1"></div>
-          <div class="circle" data-col="2"></div>
-          <div class="circle" data-col="3"></div>
-          <div class="circle" data-col="4"></div>
-          <div class="circle" data-col="5"></div>
-          <div class="circle" data-col="6"></div>
-        </div>
-        <div class="row justify-content-center" data-row="4">
-          <div class="circle" data-col="0"></div>
-          <div class="circle" data-col="1"></div>
-          <div class="circle" data-col="2"></div>
-          <div class="circle" data-col="3"></div>
-          <div class="circle" data-col="4"></div>
-          <div class="circle" data-col="5"></div>
-          <div class="circle" data-col="6"></div>
-        </div>
-        <div class="row justify-content-center" data-row="5">
-          <div class="circle" data-col="0"></div>
-          <div class="circle" data-col="1"></div>
-          <div class="circle" data-col="2"></div>
-          <div class="circle" data-col="3"></div>
-          <div class="circle" data-col="4"></div>
-          <div class="circle" data-col="5"></div>
-          <div class="circle" data-col="6"></div>
-        </div>
+        <div id="base" class="mx-auto"></div>
       </div>
-      <div id="base" class="mx-auto"></div>
-    </div>
   </main>
   <!-- /grid -->
 
