@@ -60,12 +60,13 @@ class Board {
         playerBtn.classList.add('d-none')
     }
 
-    this.player1.updateTurn();
-    this.player2.updateTurn();
     if (this.player1.turn)
       this.currentPlayer = this.player2;
     else
       this.currentPlayer = this.player1;
+
+    this.player1.updateTurn();
+    this.player2.updateTurn();
   }
 
   // finds the lowest slot in a column that has not been filled and fill it.
