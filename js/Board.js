@@ -52,6 +52,13 @@ class Board {
     }
   }
 
+  // make winning slots highlighted red
+  boldWinningSlots(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      this.getSlot(arr[i]).style.border = '4px solid red';
+    }
+  }
+
   // finds the lowest slot in a column that has not been filled and fill it
   fillSlot(firstSlotNum, lastSlotNum, color) {
     if (this.currentWin) {
@@ -144,13 +151,6 @@ class Board {
       }
     }
     return false;
-  }
-
-  // make winning slots highlighted red
-  boldWinningSlots(arr) {
-    for (let i = 0; i < arr.length; i++) {
-      this.getSlot(arr[i]).style.border = '4px solid red';
-    }
   }
 
   // check vertical wins for given color
