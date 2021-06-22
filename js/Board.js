@@ -145,16 +145,19 @@ class Board {
 
   // check vertical wins for given color
   checkVerticalWin(color) {
-    // i
+    // loop through the last index of every row, starting with last column in last row
     for (let i = this.length() - 1; i >= 0; i -= 7) {
+      // loop through every column in row i going left
       for (let j = i; j > i - 7; j--) {
         let count = 0;
         let slot = board.getSlot(j);
-
         if (this.slotFilled(slot) && slot.classList.contains(color)) {
           count++;
+          // loops through every slot above current slot
           for (let k = j - 7; k >= 0; k -= 7) {
             slot = board.getSlot(k);
+            // if there is not another vertical filled slot of this color, break
+            // out of loop and check next slot in column j
             if (this.slotFilled(slot) && slot.classList.contains(color)) {
               count++;
             } else {
