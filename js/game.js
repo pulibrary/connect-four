@@ -1,11 +1,4 @@
-/* ----------------------- Variables -----------------------*/
-
-const player1 = new Player('red');
-const player2 = new Player('yellow');
-player1.turn = true;
-player2.turn = false;
-const board = new Board();
-board.currentWin = false;
+/* ----------------------- Elements -----------------------*/
 
 const announceWinner = document.getElementById('announce-winner');
 const player1Wins = document.getElementById('player1-wins');
@@ -13,9 +6,23 @@ const player2Wins = document.getElementById('player2-wins');
 const currentPlayerDiv = document.getElementById('current-player');
 const resetBtn = document.getElementById('reset');
 const playerBtns = document.getElementsByClassName('player-btn');
+
+/* ----------------------- Variables -----------------------*/
+
+const numRows = 6; // rows are numbered top left to bottom right
 const numColumns = 7;
-const numRows = 6;
 const numSlots = 42;
+const color1 = 'red';
+const color2 = 'yellow';
+const displayNone = 'd-none';
+
+const player1 = new Player(color1);
+const player2 = new Player(color2);
+player1.turn = true;
+player2.turn = false;
+
+const board = new Board();
+board.currentWin = false;
 
 /* ----------------------- Event Handling -----------------------*/
 
@@ -23,8 +30,8 @@ resetBtn.addEventListener('click', () => {
   board.reset(player1.color, player2.color)
   announceWinner.innerHTML = '';
   board.currentWin = false;
-  currentPlayerDiv.classList.remove('d-none');
-  announceWinner.parentNode.classList.add('d-none');
+  currentPlayerDiv.classList.remove(displayNone);
+  announceWinner.parentNode.classList.add(displayNone);
 });
 
 for (let i = 0; i < board.length(); i++) {
@@ -59,26 +66,31 @@ for (let i = 0; i < board.length(); i++) {
         let winner = board.checkWin(player1.color, player2.color);
         let message = '';
         if (winner) {
+          // update announcement message and color
           if (winner === player1.color) {
             message = 'Player 1 wins!';
             player1.updateWins(1);
+            announceWinner.classList.remove(color2);
+            announceWinner.classList.add(color1);
           } else {
             message = 'Player 2 wins!';
             player2.updateWins(1);
+            announceWinner.classList.remove(color1);
+            announceWinner.classList.add(color2);
           }
-          currentPlayerDiv.classList.add('d-none');
+          currentPlayerDiv.classList.add(displayNone);
           player1Wins.innerHTML = player1.getWins();
           player2Wins.innerHTML = player2.getWins();
           announceWinner.innerHTML = message;
-          announceWinner.parentNode.classList.remove('d-none');
+          announceWinner.parentNode.classList.remove(displayNone);
         } else {
           // updates which btn is highlighted to indicate whose turn it is
           for (let i = 0; i < playerBtns.length; i++) {
             let playerBtn = playerBtns[i];
-            if (playerBtn.classList.contains('d-none'))
-              playerBtn.classList.remove('d-none');
+            if (playerBtn.classList.contains(displayNone))
+              playerBtn.classList.remove(displayNone);
             else
-              playerBtn.classList.add('d-none')
+              playerBtn.classList.add(displayNone)
           }
 
           player1.updateTurn();
