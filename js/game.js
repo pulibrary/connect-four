@@ -46,14 +46,16 @@ for (let i = 0; i < board.length(); i++) {
     let lastSlotNum = col + (numColumns * (numRows - 1));
 
     // bold border of slots in column on mouseout
-    slot.addEventListener('mouseover', () => {
-      board.boldColumn(lastSlotNum);
-    });
+      slot.addEventListener('mouseover', () => {
+        if (!board.currentWin) {
+          board.boldColumn(lastSlotNum);
+        }
+      });
 
     // unbold border of slots in column on mouseout
-    slot.addEventListener('mouseout', () => {
-      board.unboldColumn(lastSlotNum);
-    });
+      slot.addEventListener('mouseout', () => {
+        board.unboldColumn(lastSlotNum);
+      });
 
     // add token to lowest slot when a slot in the column is clicked
     slot.addEventListener('click', () => {

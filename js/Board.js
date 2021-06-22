@@ -4,12 +4,10 @@ class Board {
     this.currentWin = false;
   }
 
-  // returns slot at index i
   getSlot(i) {
     return this.slots[i];
   }
 
-  // returns board's length
   length() {
     return this.slots.length;
   }
@@ -29,6 +27,7 @@ class Board {
         slot.classList.remove(color1);
         slot.classList.remove(color2);
         slot.classList.remove('filled');
+        slot.style.border = '2px solid black';
     }
   }
 
@@ -47,7 +46,9 @@ class Board {
   // unbold border of slots in column
   unboldColumn(lastSlotNum) {
     for (let i = lastSlotNum; i >= 0; i -= 7) {
-      this.getSlot(i).style.border = '2px solid black';
+      if (this.getSlot(i).style.border != '4px solid red') {
+        this.getSlot(i).style.border = '2px solid black';
+      }
     }
   }
 
@@ -131,7 +132,7 @@ class Board {
       if (value.length > 3) {
         for (let i = 0; i < value.length - 3; i++) {
           // look through slots in chunks of 4
-          let arr = value.slice(i, i + 4);
+          const arr = value.slice(i, i + 4);
           // check that the 4 slots are next to each other
           let num = arr[3];
           if ((arr[0] + 3 === num) && (arr[1] + 2 === num) && (arr[2] + 1 === num)) {
@@ -143,6 +144,13 @@ class Board {
     return false;
   }
 
+  // make winning slots highlighted red
+  boldWinningSlots(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      this.getSlot(arr[i]).style.border = '4px solid red';
+    }
+  }
+
   // check vertical wins for given color
   checkVerticalWin(color) {
     // loop through the last index of every row, starting with last column in last row
@@ -151,6 +159,7 @@ class Board {
       for (let j = i; j > i - 7; j--) {
         let count = 0;
         let slot = board.getSlot(j);
+        const arr = [j];
         if (this.slotFilled(slot) && slot.classList.contains(color)) {
           count++;
           // loops through every slot above current slot
@@ -160,10 +169,12 @@ class Board {
             // out of loop and check next slot in column j
             if (this.slotFilled(slot) && slot.classList.contains(color)) {
               count++;
+              arr.push(k);
             } else {
               break;
             }
             if (count == 4) {
+              this.boldWinningSlots(arr);
               return true;
             }
           }
@@ -184,7 +195,7 @@ class Board {
       for (let j = i; j > i - 4; j--) {
         let count = 0;
         let slot = board.getSlot(j);
-
+        const arr = [j];
         if (this.slotFilled(slot) && slot.classList.contains(color)) {
           count++;
           // check the slot in the column up and the the left
@@ -194,11 +205,13 @@ class Board {
             // if there is not another diagonal filled slot of this color, break
             // out of loop and check next slot in column j
             if (this.slotFilled(slot) && slot.classList.contains(color)) {
+              arr.push(k);
               count++;
             } else {
               break;
             }
             if (count == 4) {
+              this.boldWinningSlots(arr);
               return true;
             }
             k = k - numColumns - 1;
@@ -212,7 +225,7 @@ class Board {
       for (let j = i - 3; j > i - numColumns; j--) {
         let count = 0;
         let slot = board.getSlot(j);
-
+        const arr = [j];
         if (this.slotFilled(slot) && slot.classList.contains(color)) {
           count++;
           // check the slot in the column up and the the right
@@ -222,11 +235,13 @@ class Board {
             // if there is not another diagonal filled slot of this color, break
             // out of loop and check next slot in column j
             if (this.slotFilled(slot) && slot.classList.contains(color)) {
+              arr.push(k);
               count++;
             } else {
               break;
             }
             if (count == 4) {
+              this.boldWinningSlots(arr);
               return true;
             }
             k = k - numColumns + 1;
