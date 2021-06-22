@@ -32,12 +32,10 @@
 
 .yellow {
   background-color: #ffc107;
+  color: black;
 }
 
 .red {
   background-color: #dc3545;
-}
-
-#announce-winner {
-  background-color: #fd7e14;
+  color: white;
 }
