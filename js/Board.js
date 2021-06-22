@@ -136,6 +136,8 @@ class Board {
           // check that the 4 slots are next to each other
           let num = arr[3];
           if ((arr[0] + 3 === num) && (arr[1] + 2 === num) && (arr[2] + 1 === num)) {
+            const arr2 = [(arr[0] + (7 * key)), (arr[1] + (7 * key)), (arr[2] + (7 * key)), (arr[3] + (7 * key))];
+            this.boldWinningSlots(arr2);
             return true;
           }
         }
