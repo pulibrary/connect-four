@@ -1,6 +1,6 @@
 class Board {
   constructor() {
-    this.slots = document.getElementsByClassName('circle');
+    this.slots = document.getElementsByClassName('slot');
     this.currentWin = false;
   }
 
