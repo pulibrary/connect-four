@@ -145,6 +145,7 @@ class Board {
 
   // check vertical wins for given color
   checkVerticalWin(color) {
+    // i
     for (let i = this.length() - 1; i >= 0; i -= 7) {
       for (let j = i; j > i - 7; j--) {
         let count = 0;
@@ -173,9 +174,8 @@ class Board {
   // check diagonal wins for given color
   checkDiagonalWin(color) {
     const numColumns = 7;
-
-    // check the bottom 3 rows
-    let i = this.length() - 1;
+    let i = this.length() - 1; // index of last slot
+    // check the bottom 3 rows because the bottom of a diagonal cannot start from top 3
     for (let z = 0; z < 3; z++) {
       // check right four cols for a win going diagonally up and left
       for (let j = i; j > i - 4; j--) {
@@ -184,11 +184,12 @@ class Board {
 
         if (this.slotFilled(slot) && slot.classList.contains(color)) {
           count++;
-
+          // check the slot in the column up and the the left
           let k = j - numColumns - 1;
-
+          slot = board.getSlot(k);
           while(slot.dataset.col >= 0) {
-            slot = board.getSlot(k);
+            // if there is not another diagonal filled slot of this color, break
+            // out of loop and check next slot in column j
             if (this.slotFilled(slot) && slot.classList.contains(color)) {
               count++;
             } else {
@@ -211,10 +212,12 @@ class Board {
 
         if (this.slotFilled(slot) && slot.classList.contains(color)) {
           count++;
+          // check the slot in the column up and the the right
           let k = j - numColumns + 1;
           slot = board.getSlot(k);
           while(slot.dataset.col >= 0) {
-            slot = board.getSlot(k);
+            // if there is not another diagonal filled slot of this color, break
+            // out of loop and check next slot in column j
             if (this.slotFilled(slot) && slot.classList.contains(color)) {
               count++;
             } else {
