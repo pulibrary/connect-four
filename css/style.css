@@ -9,7 +9,7 @@
   border-bottom: none;
 }
 
-.circle {
+.slot {
   height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -18,8 +18,18 @@
   border: 2px solid black;
 }
 
-.circle:hover {
+.slot:hover {
   cursor: pointer;
+}
+
+.yellow {
+  background-color: #ffc107;
+  color: black;
+}
+
+.red {
+  background-color: #dc3545;
+  color: white;
 }
 
 #base {
@@ -28,12 +38,4 @@
   background-color: blue;
   border: 2px solid black;
   border-radius: 5px 5px 0 0;
-}
-
-.yellow {
-  background-color: #ffc107;
-}
-
-.red {
-  background-color: #dc3545;
 }
