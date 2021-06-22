@@ -14,12 +14,10 @@ class Board {
     return this.slots.length;
   }
 
-  //
   get _currentWin() {
     return this._currentWin;
   }
 
-  //
   set _currentWin(bool) {
     this._currentWin = bool;
   }
@@ -107,6 +105,8 @@ class Board {
   // find filled columns in each row that has a filled slot for given color
   createRowMap(colorSlots) {
     let rowMap = {};
+    // keys in the row map are rows and values are columns in that rows
+    // that are filled
     for (let i = 0; i < colorSlots.length; i++) {
       let slot = colorSlots[i];
       let row = this.getRow(slot);
@@ -127,9 +127,12 @@ class Board {
     for (const key in rowMap) {
       const value = rowMap[key];
       value.sort();
+      // if there aren't at least 4 filled slots in this row, there isn't a row-based win
       if (value.length > 3) {
         for (let i = 0; i < value.length - 3; i++) {
+          // look through slots in chunks of 4
           let arr = value.slice(i, i + 4);
+          // check that the 4 slots are next to each other
           let num = arr[3];
           if ((arr[0] + 3 === num) && (arr[1] + 2 === num) && (arr[2] + 1 === num)) {
             return true;
@@ -230,10 +233,9 @@ class Board {
     return false;
   }
 
-  // check to see if there is a win
+  // check to see if there is a win anywhere on the board
   checkWin(color1, color2) {
 
-    // see if there is a horizontal win
     if (this.checkHorizontalWin(color1)) {
       this.currentWin = true;
       return color1;
@@ -244,7 +246,6 @@ class Board {
       return color2;
     }
 
-    // see if there is a vertical win
     if (this.checkVerticalWin(color1)) {
       this.currentWin = true;
       return color1;
@@ -255,7 +256,6 @@ class Board {
       return color2;
     }
 
-    // see if there is a diagonal win
     if (this.checkDiagonalWin(color1)) {
       this.currentWin = true;
       return color1;
