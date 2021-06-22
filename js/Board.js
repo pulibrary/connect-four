@@ -247,6 +247,7 @@ class Board {
               return true;
             }
             k = k - numColumns + 1;
+            slot = board.getSlot(k);
           }
           count = 0;
         }
