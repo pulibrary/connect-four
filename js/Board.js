@@ -169,6 +169,64 @@ class Board {
 
   // check diagonal wins for given color
   checkDiagonalWin(color) {
+    const numColumns = 7;
+
+    // check the bottom 3 rows
+    let i = this.length() - 1;
+    for (let z = 0; z < 3; z++) {
+      // check right four cols for a win going diagonally up and left
+      for (let j = i; j > i - 4; j--) {
+        let count = 0;
+        let slot = board.getSlot(j);
+
+        if (this.slotFilled(slot) && slot.classList.contains(color)) {
+          count++;
+
+          let k = j - numColumns - 1;
+
+          while(slot.dataset.col >= 0) {
+            slot = board.getSlot(k);
+            if (this.slotFilled(slot) && slot.classList.contains(color)) {
+              count++;
+            } else {
+              break;
+            }
+            if (count == 4) {
+              return true;
+            }
+            k = k - numColumns - 1;
+            slot = board.getSlot(k);
+          }
+          count = 0;
+        }
+      }
+
+      // check left four cols for a win going diagonally up and right
+      for (let j = i - 3; j > i - numColumns; j--) {
+        let count = 0;
+        let slot = board.getSlot(j);
+
+        if (this.slotFilled(slot) && slot.classList.contains(color)) {
+          count++;
+          let k = j - numColumns + 1;
+          slot = board.getSlot(k);
+          while(slot.dataset.col >= 0) {
+            slot = board.getSlot(k);
+            if (this.slotFilled(slot) && slot.classList.contains(color)) {
+              count++;
+            } else {
+              break;
+            }
+            if (count == 4) {
+              return true;
+            }
+            k = k - numColumns + 1;
+          }
+          count = 0;
+        }
+      }
+      i -= numColumns;
+    }
     return false;
   }
 
@@ -187,12 +245,12 @@ class Board {
     }
 
     // see if there is a vertical win
-    if (this.checkVerticalWin(color2)) {
+    if (this.checkVerticalWin(color1)) {
       this.currentWin = true;
-      return color2;
+      return color1;
     }
 
-    if (this.checkVerticalWin(color1)) {
+    if (this.checkVerticalWin(color2)) {
       this.currentWin = true;
       return color2;
     }
@@ -200,7 +258,7 @@ class Board {
     // see if there is a diagonal win
     if (this.checkDiagonalWin(color1)) {
       this.currentWin = true;
-      return color2;
+      return color1;
     }
 
     if (this.checkDiagonalWin(color2)) {
@@ -208,69 +266,6 @@ class Board {
       return color2;
     }
 
-    for (let i = this.length() - 1; i >= 0; i -= 7) {
-
-
-
-      // for each col, check for winners left diagonally, only check bottom three rows, right four cols
-      for (let j = i; j > i - 4; j--) {
-        let count = 0;
-        let slot = board.getSlot(j);
-        let color = color1;
-
-        if (this.slotFilled(slot)) {
-          count++;
-          if (slot.classList.contains(color2)) {
-            color = color2;
-          }
-          let k = j - 7 - 1;
-          slot = board.getSlot(k);
-          while(slot.dataset.col >= 3) {
-            slot = board.getSlot(k);
-            if (this.slotFilled(slot) && slot.classList.contains(color)) {
-              count++;
-            } else {
-              break;
-            }
-            if (count == 4) {
-              this.currentWin = true;
-              return color;
-            }
-            k = k - 7 - 1;
-          }
-          count = 0;
-        }
-      }
-      // for each col, check for winners left diagonally, only check bottom three rows, left four cols
-      for (let j = i - 3; j > i - 7; j--) {
-        let count = 0;
-        let slot = board.getSlot(j);
-        let color = color1;
-
-        if (this.slotFilled(slot)) {
-          count++;
-          if (slot.classList.contains(color2)) {
-            color = color2;
-          }
-          let k = j - 7 + 1;
-          slot = board.getSlot(k);
-          while(slot.dataset.col >= 0) {
-            slot = board.getSlot(k);
-            if (this.slotFilled(slot) && slot.classList.contains(color)) {
-              count++;
-            } else {
-              break;
-            }
-            if (count == 4) {
-              this.currentWin = true;
-              return color;
-            }
-            k = k - 7 + 1;
-          }
-          count = 0;
-        }
-      }
-    }
     return false;
   }
 }
