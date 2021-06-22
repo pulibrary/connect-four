@@ -14,6 +14,7 @@ const currentPlayerDiv = document.getElementById('current-player');
 const resetBtn = document.getElementById('reset');
 const playerBtns = document.getElementsByClassName('player-btn');
 const numColumns = 7;
+const numRows = 6;
 const numSlots = 42;
 
 /* ----------------------- Event Handling -----------------------*/
@@ -29,14 +30,13 @@ resetBtn.addEventListener('click', () => {
 for (let i = 0; i < board.length(); i++) {
     const slot = board.getSlot(i);
 
-    const row = parseInt(slot.parentNode.dataset.row, 10);
     const col = parseInt(slot.dataset.col, 10);
 
     // find index for first slot in current column
-    let firstSlotNum = col + (7 * 0);
+    let firstSlotNum = col;
 
     // find index for last slot in current column
-    let lastSlotNum = col + (7 * 5);
+    let lastSlotNum = col + (numColumns * (numRows - 1));
 
     // bold border of slots in column on mouseout
     slot.addEventListener('mouseover', () => {
